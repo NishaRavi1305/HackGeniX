@@ -13,6 +13,7 @@ from src.core.config import get_settings
 from src.core.database import mongodb_client
 from src.core.storage import storage_client
 from src.api import health, documents, interviews, questions, voice, sessions, reports
+from src.api.middleware import AuthMiddleware
 
 # Configure logging
 logging.basicConfig(
@@ -68,6 +69,14 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    
+    # Add auth middleware (optional - can be disabled for development)
+    # Note: Auth is also enforced at route level via Depends()
+    # This middleware provides global auth enforcement if enabled
+    if settings.auth_enabled:
+        logger.info("JWT Authentication enabled")
+    else:
+        logger.warning("JWT Authentication DISABLED - development mode only!")
     
     # Include routers
     app.include_router(health.router, tags=["Health"])

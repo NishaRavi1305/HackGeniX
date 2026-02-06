@@ -12,6 +12,9 @@ from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
 
 from src.core.database import mongodb_client
+from src.core.auth import get_current_user, require_permission
+from src.core.permissions import Permissions
+from src.models.auth import AuthenticatedUser
 from src.services.question_generator import (
     QuestionGenerator,
     get_question_generator,
@@ -121,7 +124,10 @@ class FollowUpResponse(BaseModel):
 # Endpoints
 
 @router.post("/questions/generate", response_model=GenerateQuestionsResponse)
-async def generate_questions(request: GenerateQuestionsRequest):
+async def generate_questions(
+    request: GenerateQuestionsRequest,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_QUESTIONS)),
+):
     """
     Generate interview questions based on job description and resume.
     
@@ -228,7 +234,10 @@ async def generate_questions(request: GenerateQuestionsRequest):
 
 
 @router.post("/answers/evaluate", response_model=EvaluateAnswerResponse)
-async def evaluate_answer(request: EvaluateAnswerRequest):
+async def evaluate_answer(
+    request: EvaluateAnswerRequest,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.CONDUCT_INTERVIEW)),
+):
     """
     Evaluate a candidate's answer to an interview question.
     
@@ -277,7 +286,10 @@ async def evaluate_answer(request: EvaluateAnswerRequest):
 
 
 @router.post("/answers/evaluate-behavioral", response_model=EvaluateAnswerResponse)
-async def evaluate_behavioral_answer(request: EvaluateBehavioralRequest):
+async def evaluate_behavioral_answer(
+    request: EvaluateBehavioralRequest,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.CONDUCT_INTERVIEW)),
+):
     """
     Evaluate a behavioral interview answer using STAR criteria.
     
@@ -321,7 +333,10 @@ async def evaluate_behavioral_answer(request: EvaluateBehavioralRequest):
 
 
 @router.post("/questions/follow-up", response_model=FollowUpResponse)
-async def generate_follow_up(request: GenerateFollowUpRequest):
+async def generate_follow_up(
+    request: GenerateFollowUpRequest,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.CONDUCT_INTERVIEW)),
+):
     """
     Generate a follow-up question based on candidate's answer.
     
@@ -344,7 +359,9 @@ async def generate_follow_up(request: GenerateFollowUpRequest):
 
 
 @router.get("/questions/stages")
-async def list_interview_stages():
+async def list_interview_stages(
+    user: AuthenticatedUser = Depends(get_current_user),
+):
     """List available interview stages."""
     return {
         "stages": [
@@ -355,7 +372,9 @@ async def list_interview_stages():
 
 
 @router.get("/questions/difficulties")
-async def list_difficulties():
+async def list_difficulties(
+    user: AuthenticatedUser = Depends(get_current_user),
+):
     """List available difficulty levels."""
     return {
         "difficulties": [

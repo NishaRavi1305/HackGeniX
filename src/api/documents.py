@@ -13,6 +13,9 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from src.core.database import get_db, mongodb_client
 from src.core.storage import get_storage, StorageClient
+from src.core.auth import get_current_user, require_role, require_permission
+from src.core.permissions import Permissions
+from src.models.auth import AuthenticatedUser, UserRole
 from src.models.documents import (
     ResumeUploadResponse,
     JobDescriptionCreateRequest,
@@ -40,6 +43,7 @@ async def upload_resume(
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     storage: StorageClient = Depends(get_storage),
+    user: AuthenticatedUser = Depends(require_permission(Permissions.UPLOAD_DOCUMENT)),
 ):
     """
     Upload a resume file for parsing and analysis.
@@ -101,7 +105,10 @@ async def upload_resume(
 
 
 @router.get("/resumes/{resume_id}")
-async def get_resume(resume_id: str):
+async def get_resume(
+    resume_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_DOCUMENT)),
+):
     """
     Get resume details by ID.
     """
@@ -118,7 +125,11 @@ async def get_resume(resume_id: str):
 
 
 @router.get("/resumes")
-async def list_resumes(skip: int = 0, limit: int = 20):
+async def list_resumes(
+    skip: int = 0,
+    limit: int = 20,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_DOCUMENT)),
+):
     """
     List all resumes with pagination.
     """
@@ -134,6 +145,7 @@ async def list_resumes(skip: int = 0, limit: int = 20):
 async def delete_resume(
     resume_id: str,
     storage: StorageClient = Depends(get_storage),
+    user: AuthenticatedUser = Depends(require_permission(Permissions.DELETE_DOCUMENT)),
 ):
     """
     Delete a resume by ID.
@@ -161,6 +173,7 @@ async def delete_resume(
 async def create_job_description(
     request: JobDescriptionCreateRequest,
     background_tasks: BackgroundTasks,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.UPLOAD_DOCUMENT)),
 ):
     """
     Create a new job description for matching.
@@ -192,7 +205,10 @@ async def create_job_description(
 
 
 @router.get("/job-descriptions/{jd_id}")
-async def get_job_description(jd_id: str):
+async def get_job_description(
+    jd_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_DOCUMENT)),
+):
     """
     Get job description details by ID.
     """
@@ -209,7 +225,11 @@ async def get_job_description(jd_id: str):
 
 
 @router.get("/job-descriptions")
-async def list_job_descriptions(skip: int = 0, limit: int = 20):
+async def list_job_descriptions(
+    skip: int = 0,
+    limit: int = 20,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_DOCUMENT)),
+):
     """
     List all job descriptions with pagination.
     """
@@ -227,6 +247,7 @@ async def list_job_descriptions(skip: int = 0, limit: int = 20):
 async def match_resume_to_job(
     resume_id: str,
     job_description_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.RUN_ANALYSIS)),
 ):
     """
     Match a resume against a job description.

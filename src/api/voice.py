@@ -10,11 +10,14 @@ import logging
 from typing import Optional, List
 from datetime import datetime
 
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query, BackgroundTasks
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query, BackgroundTasks, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 import io
 
+from src.core.auth import get_current_user, require_permission, require_role
+from src.core.permissions import Permissions
+from src.models.auth import AuthenticatedUser, UserRole
 from src.providers.stt import (
     get_whisper_provider_async,
     TranscriptionResult,
@@ -101,6 +104,7 @@ async def transcribe_audio(
     audio: UploadFile = File(..., description="Audio file to transcribe"),
     language: Optional[str] = Query(None, description="Language code"),
     context: Optional[str] = Query(None, description="Interview context"),
+    user: AuthenticatedUser = Depends(require_permission(Permissions.USE_VOICE)),
 ):
     """
     Transcribe audio file to text using Whisper.
@@ -150,6 +154,7 @@ async def transcribe_interview_audio(
     audio: UploadFile = File(..., description="Interview audio to transcribe"),
     context: Optional[str] = Query(None, description="Role/position context"),
     technical_terms: Optional[str] = Query(None, description="Comma-separated technical terms"),
+    user: AuthenticatedUser = Depends(require_permission(Permissions.USE_VOICE)),
 ):
     """
     Transcribe interview audio with optimized settings.
@@ -195,6 +200,7 @@ async def transcribe_interview_audio(
 @router.post("/detect-language", response_model=LanguageDetectResponse)
 async def detect_language(
     audio: UploadFile = File(..., description="Audio file for language detection"),
+    user: AuthenticatedUser = Depends(require_permission(Permissions.USE_VOICE)),
 ):
     """
     Detect the language of audio content.
@@ -218,7 +224,9 @@ async def detect_language(
 
 
 @router.get("/stt/info", response_model=STTInfoResponse)
-async def get_stt_info():
+async def get_stt_info(
+    user: AuthenticatedUser = Depends(get_current_user),
+):
     """Get information about the STT provider."""
     try:
         stt = await get_whisper_provider_async()
@@ -237,7 +245,9 @@ async def get_stt_info():
 
 
 @router.get("/stt/models")
-async def list_stt_models():
+async def list_stt_models(
+    user: AuthenticatedUser = Depends(get_current_user),
+):
     """List available Whisper model sizes."""
     return {
         "models": [
@@ -256,6 +266,7 @@ async def list_stt_models():
 @router.post("/synthesize")
 async def synthesize_speech(
     request: SynthesizeRequest,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.USE_VOICE)),
 ):
     """
     Synthesize text to speech.
@@ -294,6 +305,7 @@ async def synthesize_interview_question(
     text: str = Query(..., description="Question text"),
     question_number: Optional[int] = Query(None, description="Question number"),
     total_questions: Optional[int] = Query(None, description="Total questions"),
+    user: AuthenticatedUser = Depends(require_permission(Permissions.USE_VOICE)),
 ):
     """
     Synthesize an interview question with appropriate pacing.
@@ -324,7 +336,9 @@ async def synthesize_interview_question(
 
 
 @router.get("/tts/voices", response_model=VoiceListResponse)
-async def list_voices():
+async def list_voices(
+    user: AuthenticatedUser = Depends(get_current_user),
+):
     """List available TTS voices."""
     try:
         tts = await get_tts_provider_async()
@@ -341,7 +355,9 @@ async def list_voices():
 
 
 @router.get("/tts/info", response_model=TTSInfoResponse)
-async def get_tts_info():
+async def get_tts_info(
+    user: AuthenticatedUser = Depends(get_current_user),
+):
     """Get information about the TTS provider."""
     try:
         tts = await get_tts_provider_async()
@@ -359,6 +375,7 @@ async def configure_tts(
     voice_id: Optional[str] = Query(None, description="Voice ID to use"),
     rate: Optional[int] = Query(None, ge=50, le=300, description="Speech rate"),
     volume: Optional[float] = Query(None, ge=0.0, le=1.0, description="Volume level"),
+    user: AuthenticatedUser = Depends(require_role(UserRole.ADMIN, UserRole.HIRING_MANAGER)),
 ):
     """Configure TTS settings."""
     try:

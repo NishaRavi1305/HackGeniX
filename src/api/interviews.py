@@ -13,6 +13,9 @@ from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
 
 from src.core.database import mongodb_client
+from src.core.auth import get_current_user, require_role, require_permission
+from src.core.permissions import Permissions
+from src.models.auth import AuthenticatedUser, UserRole
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -70,7 +73,10 @@ class InterviewReportSummary(BaseModel):
 
 
 @router.post("/", response_model=InterviewResponse)
-async def create_interview(request: CreateInterviewRequest):
+async def create_interview(
+    request: CreateInterviewRequest,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.CREATE_INTERVIEW)),
+):
     """
     Create/schedule a new interview session.
     """
@@ -120,7 +126,10 @@ async def create_interview(request: CreateInterviewRequest):
 
 
 @router.get("/{interview_id}", response_model=InterviewResponse)
-async def get_interview(interview_id: str):
+async def get_interview(
+    interview_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_INTERVIEW)),
+):
     """
     Get interview details by ID.
     """
@@ -151,6 +160,7 @@ async def list_interviews(
     status: Optional[InterviewStatus] = None,
     skip: int = 0,
     limit: int = 20,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_INTERVIEW)),
 ):
     """
     List interviews with optional status filter.
@@ -169,7 +179,10 @@ async def list_interviews(
 
 
 @router.post("/{interview_id}/start")
-async def start_interview(interview_id: str):
+async def start_interview(
+    interview_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.CONDUCT_INTERVIEW)),
+):
     """
     Start an interview session.
     """
@@ -199,7 +212,10 @@ async def start_interview(interview_id: str):
 
 
 @router.post("/{interview_id}/end")
-async def end_interview(interview_id: str):
+async def end_interview(
+    interview_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.CONDUCT_INTERVIEW)),
+):
     """
     End an interview session and trigger report generation.
     """
@@ -231,7 +247,10 @@ async def end_interview(interview_id: str):
 
 
 @router.get("/{interview_id}/report", response_model=InterviewReportSummary)
-async def get_interview_report(interview_id: str):
+async def get_interview_report(
+    interview_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_REPORTS)),
+):
     """
     Get the generated report for a completed interview.
     """

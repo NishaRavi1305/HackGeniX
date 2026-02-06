@@ -51,6 +51,7 @@ class Settings(BaseSettings):
     jwt_secret_key: str = "your-super-secret-key-change-in-production"
     jwt_algorithm: str = "HS256"
     jwt_access_token_expire_minutes: int = 60
+    auth_enabled: bool = True  # Set to False to disable auth (for development)
     
     # Model Provider Overrides
     provider_llm_model: Optional[str] = None

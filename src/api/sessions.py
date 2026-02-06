@@ -6,8 +6,11 @@ Provides REST API for managing complete interview sessions.
 import logging
 from typing import Optional, List
 
-from fastapi import APIRouter, HTTPException, status, Query
+from fastapi import APIRouter, HTTPException, status, Query, Depends
 
+from src.core.auth import get_current_user, require_role, require_permission, require_session_access
+from src.core.permissions import Permissions
+from src.models.auth import AuthenticatedUser, UserRole
 from src.models.interview import (
     InterviewSession,
     InterviewConfig,
@@ -86,7 +89,10 @@ def _get_mock_jd() -> ParsedJobDescription:
 
 
 @router.post("/start", response_model=StartInterviewResponse)
-async def start_interview(request: StartInterviewRequest):
+async def start_interview(
+    request: StartInterviewRequest,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.CREATE_SESSION)),
+):
     """
     Start a new interview session.
     
@@ -121,7 +127,10 @@ async def start_interview(request: StartInterviewRequest):
 
 
 @router.post("/answer", response_model=SubmitAnswerResponse)
-async def submit_answer(request: SubmitAnswerRequest):
+async def submit_answer(
+    request: SubmitAnswerRequest,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.PARTICIPATE_SESSION)),
+):
     """
     Submit an answer for the current question.
     
@@ -157,7 +166,10 @@ async def submit_answer(request: SubmitAnswerRequest):
 
 
 @router.get("/{session_id}/progress", response_model=InterviewProgressResponse)
-async def get_progress(session_id: str):
+async def get_progress(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_session_access("session_id")),
+):
     """Get current interview progress and state."""
     orchestrator = get_interview_orchestrator()
     
@@ -171,7 +183,10 @@ async def get_progress(session_id: str):
 
 
 @router.get("/{session_id}", response_model=dict)
-async def get_session(session_id: str):
+async def get_session(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_session_access("session_id")),
+):
     """Get full interview session details."""
     orchestrator = get_interview_orchestrator()
     
@@ -186,7 +201,11 @@ async def get_session(session_id: str):
 
 
 @router.post("/{session_id}/end", response_model=InterviewReportResponse)
-async def end_interview(session_id: str, request: Optional[EndInterviewRequest] = None):
+async def end_interview(
+    session_id: str,
+    request: Optional[EndInterviewRequest] = None,
+    user: AuthenticatedUser = Depends(require_session_access("session_id")),
+):
     """
     End an interview and generate the final report.
     
@@ -212,7 +231,10 @@ async def end_interview(session_id: str, request: Optional[EndInterviewRequest] 
 
 
 @router.get("/{session_id}/report", response_model=InterviewReportResponse)
-async def get_report(session_id: str):
+async def get_report(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_REPORTS)),
+):
     """
     Get the interview report.
     
@@ -237,7 +259,10 @@ async def get_report(session_id: str):
 
 
 @router.post("/{session_id}/pause")
-async def pause_interview(session_id: str):
+async def pause_interview(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_session_access("session_id")),
+):
     """Pause an ongoing interview."""
     orchestrator = get_interview_orchestrator()
     
@@ -256,7 +281,10 @@ async def pause_interview(session_id: str):
 
 
 @router.post("/{session_id}/resume")
-async def resume_interview(session_id: str):
+async def resume_interview(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_session_access("session_id")),
+):
     """Resume a paused interview."""
     orchestrator = get_interview_orchestrator()
     
@@ -279,6 +307,7 @@ async def resume_interview(session_id: str):
 async def list_sessions(
     status: Optional[str] = Query(None, description="Filter by status"),
     limit: int = Query(50, ge=1, le=100),
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_SESSION)),
 ):
     """List interview sessions."""
     orchestrator = get_interview_orchestrator()
@@ -313,7 +342,10 @@ async def list_sessions(
 
 
 @router.delete("/{session_id}")
-async def delete_session(session_id: str):
+async def delete_session(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.DELETE_SESSION)),
+):
     """Delete an interview session."""
     orchestrator = get_interview_orchestrator()
     
@@ -329,14 +361,22 @@ async def delete_session(session_id: str):
 # Endpoints for managing mock documents (for testing)
 
 @router.post("/mock/resume")
-async def add_mock_resume(resume_id: str, resume: ParsedResume):
+async def add_mock_resume(
+    resume_id: str,
+    resume: ParsedResume,
+    user: AuthenticatedUser = Depends(require_role(UserRole.ADMIN)),
+):
     """Add a mock resume for testing."""
     _mock_resumes[resume_id] = resume
     return {"message": f"Resume {resume_id} stored", "id": resume_id}
 
 
 @router.post("/mock/jd")
-async def add_mock_jd(jd_id: str, jd: ParsedJobDescription):
+async def add_mock_jd(
+    jd_id: str,
+    jd: ParsedJobDescription,
+    user: AuthenticatedUser = Depends(require_role(UserRole.ADMIN)),
+):
     """Add a mock job description for testing."""
     _mock_jds[jd_id] = jd
     return {"message": f"Job description {jd_id} stored", "id": jd_id}

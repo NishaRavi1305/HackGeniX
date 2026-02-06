@@ -6,10 +6,13 @@ Provides REST API for retrieving interview reports in JSON and PDF formats.
 import logging
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.responses import StreamingResponse
 import io
 
+from src.core.auth import get_current_user, require_permission, require_role
+from src.core.permissions import Permissions
+from src.models.auth import AuthenticatedUser, UserRole
 from src.models.interview import InterviewReportResponse
 from src.services.interview_orchestrator import get_interview_orchestrator
 from src.providers.report_storage import get_report_storage_provider
@@ -20,7 +23,10 @@ router = APIRouter(prefix="/api/v1/reports", tags=["reports"])
 
 
 @router.get("/{session_id}", response_model=InterviewReportResponse)
-async def get_report(session_id: str):
+async def get_report(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_REPORTS)),
+):
     """
     Get the interview report as JSON.
     
@@ -52,7 +58,10 @@ async def get_report(session_id: str):
 
 
 @router.get("/{session_id}/pdf")
-async def download_pdf(session_id: str):
+async def download_pdf(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.EXPORT_REPORTS)),
+):
     """
     Download the interview report as a PDF file.
     
@@ -123,7 +132,10 @@ async def download_pdf(session_id: str):
 
 
 @router.get("/{session_id}/pdf/preview")
-async def preview_pdf(session_id: str):
+async def preview_pdf(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_REPORTS)),
+):
     """
     Preview the interview report PDF in browser.
     
@@ -183,7 +195,10 @@ async def preview_pdf(session_id: str):
 
 
 @router.delete("/{session_id}/pdf")
-async def delete_pdf(session_id: str):
+async def delete_pdf(
+    session_id: str,
+    user: AuthenticatedUser = Depends(require_role(UserRole.ADMIN, UserRole.HIRING_MANAGER)),
+):
     """
     Delete a stored PDF report.
     
@@ -208,7 +223,10 @@ async def delete_pdf(session_id: str):
 
 
 @router.get("/")
-async def list_reports(limit: int = 50):
+async def list_reports(
+    limit: int = 50,
+    user: AuthenticatedUser = Depends(require_permission(Permissions.VIEW_REPORTS)),
+):
     """
     List all stored PDF reports.
     
