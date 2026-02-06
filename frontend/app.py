@@ -112,23 +112,109 @@ def check_connection() -> str:
 # ==================== Documents Functions ====================
 
 def upload_resume(file) -> str:
-    """Upload a resume file."""
+    """Upload a resume file and display parsed data."""
     if not api_client.auth.is_authenticated:
         return "Error: Not authenticated"
     if file is None:
         return "Error: No file selected"
     
     result = run_async(api_client.upload_resume(file.name, os.path.basename(file.name)))
+    
+    # Format the result nicely if parsing succeeded
+    if result.get("status") == "parsed" and result.get("parsed_data"):
+        pd = result["parsed_data"]
+        contact = pd.get("contact", {})
+        
+        output = []
+        output.append(f"Resume ID: {result.get('id')}")
+        output.append(f"Status: {result.get('status')}")
+        output.append(f"File: {result.get('filename')}")
+        output.append("")
+        output.append("=== PARSED DATA ===")
+        
+        if contact:
+            output.append(f"\nName: {contact.get('name', 'N/A')}")
+            output.append(f"Email: {contact.get('email', 'N/A')}")
+            output.append(f"Phone: {contact.get('phone', 'N/A')}")
+            if contact.get('location'):
+                output.append(f"Location: {contact.get('location')}")
+            if contact.get('linkedin'):
+                output.append(f"LinkedIn: {contact.get('linkedin')}")
+            if contact.get('github'):
+                output.append(f"GitHub: {contact.get('github')}")
+        
+        if pd.get("summary"):
+            output.append(f"\nSummary: {pd.get('summary')[:200]}...")
+        
+        skills = pd.get("skills", [])
+        if skills:
+            output.append(f"\nSkills ({len(skills)}): {', '.join(skills[:15])}")
+            if len(skills) > 15:
+                output.append(f"  ...and {len(skills) - 15} more")
+        
+        experience = pd.get("experience", [])
+        if experience:
+            output.append(f"\nExperience ({len(experience)} positions):")
+            for exp in experience[:3]:
+                title = exp.get("title", "Unknown")
+                company = exp.get("company", "Unknown")
+                dates = f"{exp.get('start_date', '?')} - {exp.get('end_date', 'Present')}"
+                output.append(f"  - {title} at {company} ({dates})")
+        
+        education = pd.get("education", [])
+        if education:
+            output.append(f"\nEducation ({len(education)}):")
+            for edu in education[:2]:
+                degree = edu.get("degree", "")
+                field = edu.get("field", "")
+                institution = edu.get("institution", "Unknown")
+                output.append(f"  - {degree} {field} - {institution}")
+        
+        certifications = pd.get("certifications", [])
+        if certifications:
+            output.append(f"\nCertifications: {', '.join(certifications[:5])}")
+        
+        return "\n".join(output)
+    
+    # Fall back to JSON for errors or pending status
     return format_json(result)
 
 
 def list_resumes() -> str:
-    """List all resumes."""
+    """List all resumes with status and parsed info."""
     if not api_client.auth.is_authenticated:
         return "Error: Not authenticated"
     
     result = run_async(api_client.list_resumes())
-    return format_json(result)
+    
+    if "error" in result:
+        return format_json(result)
+    
+    resumes = result.get("resumes", [])
+    if not resumes:
+        return "No resumes found."
+    
+    output = [f"Found {len(resumes)} resume(s):\n"]
+    
+    for r in resumes:
+        output.append(f"ID: {r.get('_id')}")
+        output.append(f"  File: {r.get('filename')}")
+        output.append(f"  Status: {r.get('status', 'unknown')}")
+        
+        parsed = r.get("parsed_data")
+        if parsed and r.get("status") == "parsed":
+            contact = parsed.get("contact", {})
+            name = contact.get("name", "Unknown")
+            skills = parsed.get("skills", [])
+            output.append(f"  Candidate: {name}")
+            if skills:
+                output.append(f"  Skills: {', '.join(skills[:8])}{'...' if len(skills) > 8 else ''}")
+        elif r.get("error_message"):
+            output.append(f"  Error: {r.get('error_message')[:50]}...")
+        
+        output.append("")
+    
+    return "\n".join(output)
 
 
 def delete_resume(resume_id: str) -> str:
@@ -555,9 +641,9 @@ def create_app():
                 with gr.Row():
                     with gr.Column():
                         gr.Markdown("#### Upload Resume")
-                        resume_file = gr.File(label="Resume (PDF)", file_types=[".pdf"])
-                        upload_btn = gr.Button("Upload Resume")
-                        upload_result = gr.Textbox(label="Result", lines=5)
+                        resume_file = gr.File(label="Resume (PDF/DOCX)", file_types=[".pdf", ".docx", ".doc"])
+                        upload_btn = gr.Button("Upload Resume", variant="primary")
+                        upload_result = gr.Textbox(label="Result", lines=15)
                         
                         upload_btn.click(upload_resume, inputs=[resume_file], outputs=[upload_result])
                     

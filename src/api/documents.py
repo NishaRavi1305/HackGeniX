@@ -8,8 +8,7 @@ from typing import List, Optional
 from datetime import datetime
 
 from bson import ObjectId
-from fastapi import APIRouter, File, UploadFile, HTTPException, Depends, BackgroundTasks, Form
-from motor.motor_asyncio import AsyncIOMotorDatabase
+from fastapi import APIRouter, File, UploadFile, HTTPException, Depends, Form
 
 from src.core.database import get_db, mongodb_client
 from src.core.storage import get_storage, StorageClient
@@ -41,7 +40,6 @@ MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
 
 @router.post("/resumes", response_model=ResumeUploadResponse)
 async def upload_resume(
-    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     storage: StorageClient = Depends(get_storage),
     user: AuthenticatedUser = Depends(require_permission(Permissions.UPLOAD_DOCUMENT)),
@@ -49,9 +47,13 @@ async def upload_resume(
     """
     Upload a resume file for parsing and analysis.
     
+    The resume is parsed synchronously using LLM for robust extraction.
+    
     Supported formats: PDF, DOC, DOCX
     Max file size: 10 MB
     """
+    from src.services.document_processor import DocumentProcessor
+    
     # Validate content type
     if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(
@@ -77,13 +79,29 @@ async def upload_resume(
         content_type=file.content_type,
     )
     
-    # Create document record
+    # Parse resume with LLM (synchronous)
+    processor = DocumentProcessor()
+    
+    try:
+        parsed_data = await processor.parse_resume_with_llm(content, file.content_type)
+        status = "parsed"
+        error_message = None
+        logger.info(f"Resume parsed successfully: {file.filename}")
+    except Exception as e:
+        logger.error(f"Failed to parse resume {file.filename}: {e}")
+        parsed_data = None
+        status = "failed"
+        error_message = str(e)
+    
+    # Create document record with parsed data
     doc = ResumeDocument(
         filename=file.filename,
         storage_key=storage_key,
         content_type=file.content_type,
         file_size=file_size,
-        status="pending",
+        status=status,
+        parsed_data=parsed_data,
+        error_message=error_message,
     )
     
     # Insert into database
@@ -92,16 +110,14 @@ async def upload_resume(
     )
     doc_id = str(result.inserted_id)
     
-    # Queue background parsing task
-    # background_tasks.add_task(parse_resume_task, doc_id)
-    
-    logger.info(f"Resume uploaded: {file.filename} -> {doc_id}")
+    logger.info(f"Resume uploaded: {file.filename} -> {doc_id} (status: {status})")
     
     return ResumeUploadResponse(
         id=doc_id,
         filename=file.filename,
-        status="pending",
-        message="Resume uploaded successfully. Parsing in progress.",
+        status=status,
+        message=f"Resume uploaded and {'parsed successfully' if status == 'parsed' else 'parsing failed: ' + (error_message or 'unknown error')}",
+        parsed_data=parsed_data,
     )
 
 
@@ -173,35 +189,63 @@ async def delete_resume(
 @router.post("/job-descriptions", response_model=JobDescriptionResponse)
 async def create_job_description(
     request: JobDescriptionCreateRequest,
-    background_tasks: BackgroundTasks,
     user: AuthenticatedUser = Depends(require_permission(Permissions.UPLOAD_DOCUMENT)),
 ):
     """
-    Create a new job description for matching.
+    Create a new job description from text for matching.
+    
+    The job description is parsed synchronously using LLM.
     """
+    from src.services.document_processor import DocumentProcessor
+    
+    # Parse job description with LLM
+    processor = DocumentProcessor()
+    
+    try:
+        parsed_data = await processor.parse_job_description_with_llm(request.description)
+        
+        # Use provided title/company or fall back to extracted values
+        final_title = request.title if request.title else (parsed_data.title or "Untitled Position")
+        final_company = request.company if request.company else parsed_data.company
+        
+        # Update parsed_data with final values
+        parsed_data.title = final_title
+        parsed_data.company = final_company
+        
+        status = "parsed"
+        error_message = None
+        logger.info(f"JD parsed successfully: {final_title}")
+    except Exception as e:
+        logger.error(f"Failed to parse JD: {e}")
+        final_title = request.title or "Untitled Position"
+        final_company = request.company
+        parsed_data = None
+        status = "failed"
+        error_message = str(e)
+    
     doc = JobDescriptionDocument(
-        title=request.title,
-        company=request.company,
-        status="pending",
+        title=final_title,
+        company=final_company,
+        parsed_data=parsed_data,
+        status=status,
+        error_message=error_message,
     )
     
-    # Store raw text for parsing
+    # Store raw text for reference
     doc_dict = doc.model_dump(by_alias=True, exclude={"id"})
     doc_dict["raw_text"] = request.description
     
     result = await mongodb_client.job_descriptions.insert_one(doc_dict)
     doc_id = str(result.inserted_id)
     
-    # Queue background parsing task
-    # background_tasks.add_task(parse_job_description_task, doc_id)
-    
-    logger.info(f"Job description created: {request.title} -> {doc_id}")
+    logger.info(f"Job description created: {final_title} -> {doc_id} (status: {status})")
     
     return JobDescriptionResponse(
         id=doc_id,
-        title=request.title,
-        company=request.company,
-        status="pending",
+        title=final_title,
+        company=final_company,
+        status=status,
+        parsed_data=parsed_data,
     )
 
 

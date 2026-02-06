@@ -133,6 +133,7 @@ class ResumeUploadResponse(BaseModel):
     filename: str
     status: str
     message: str
+    parsed_data: Optional[ParsedResume] = None
 
 
 class JobDescriptionCreateRequest(BaseModel):

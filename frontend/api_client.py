@@ -141,8 +141,8 @@ class APIClient:
     # ==================== Documents ====================
     
     async def upload_resume(self, file_path: str, filename: str) -> Dict[str, Any]:
-        """Upload a resume file."""
-        async with httpx.AsyncClient(timeout=60.0) as client:
+        """Upload a resume file. Includes LLM parsing which may take time."""
+        async with httpx.AsyncClient(timeout=120.0) as client:
             with open(file_path, "rb") as f:
                 files = {"file": (filename, f, "application/pdf")}
                 response = await client.post(
