@@ -205,6 +205,33 @@ class APIClient:
                 return response.json()
             return {"error": response.text, "status_code": response.status_code}
     
+    async def upload_job_description(
+        self,
+        file_path: str,
+        filename: str,
+        title: Optional[str] = None,
+        company: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Upload a job description file (PDF/DOCX) for parsing."""
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            with open(file_path, "rb") as f:
+                files = {"file": (filename, f, "application/pdf")}
+                data = {}
+                if title and title.strip():
+                    data["title"] = title
+                if company and company.strip():
+                    data["company"] = company
+                
+                response = await client.post(
+                    f"{self.base_url}/api/v1/documents/job-descriptions/upload",
+                    files=files,
+                    data=data if data else None,
+                    headers=self.headers,
+                )
+            if response.status_code == 200:
+                return response.json()
+            return {"error": response.text, "status_code": response.status_code}
+    
     async def list_job_descriptions(self, skip: int = 0, limit: int = 20) -> Dict[str, Any]:
         """List all job descriptions."""
         async with httpx.AsyncClient(timeout=30.0) as client:

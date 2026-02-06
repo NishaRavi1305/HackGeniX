@@ -4,11 +4,11 @@ Document management API endpoints.
 Handles resume and job description uploads, parsing, and matching.
 """
 import logging
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 
 from bson import ObjectId
-from fastapi import APIRouter, File, UploadFile, HTTPException, Depends, BackgroundTasks
+from fastapi import APIRouter, File, UploadFile, HTTPException, Depends, BackgroundTasks, Form
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from src.core.database import get_db, mongodb_client
@@ -20,6 +20,7 @@ from src.models.documents import (
     ResumeUploadResponse,
     JobDescriptionCreateRequest,
     JobDescriptionResponse,
+    JobDescriptionUploadResponse,
     MatchResult,
     ResumeDocument,
     JobDescriptionDocument,
@@ -201,6 +202,113 @@ async def create_job_description(
         title=request.title,
         company=request.company,
         status="pending",
+    )
+
+
+@router.post("/job-descriptions/upload", response_model=JobDescriptionUploadResponse)
+async def upload_job_description(
+    file: UploadFile = File(...),
+    title: Optional[str] = Form(None),
+    company: Optional[str] = Form(None),
+    storage: StorageClient = Depends(get_storage),
+    user: AuthenticatedUser = Depends(require_permission(Permissions.UPLOAD_DOCUMENT)),
+):
+    """
+    Upload a job description file (PDF/DOCX) for parsing and analysis.
+    
+    If title and company are not provided, they will be extracted from the document using LLM.
+    
+    Supported formats: PDF, DOC, DOCX
+    Max file size: 10 MB
+    """
+    from src.services.document_processor import DocumentProcessor
+    
+    # Validate content type
+    if file.content_type not in ALLOWED_CONTENT_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid file type. Allowed types: PDF, DOC, DOCX"
+        )
+    
+    # Read file content
+    content = await file.read()
+    file_size = len(content)
+    
+    if file_size > MAX_FILE_SIZE:
+        raise HTTPException(
+            status_code=400,
+            detail=f"File too large. Maximum size: 10 MB"
+        )
+    
+    # Upload to storage
+    storage_key = await storage.upload_bytes(
+        data=content,
+        filename=file.filename,
+        category="job_descriptions",
+        content_type=file.content_type,
+    )
+    
+    # Extract text and parse with LLM
+    processor = DocumentProcessor()
+    
+    try:
+        # Extract raw text from PDF/DOCX
+        raw_text = await processor.extract_text(content, file.content_type)
+        
+        # Parse with LLM to extract structured data
+        parsed_data = await processor.parse_job_description_with_llm(raw_text)
+        
+        # Use provided title/company or fall back to extracted values
+        final_title = title if title and title.strip() else (parsed_data.title or file.filename)
+        final_company = company if company and company.strip() else parsed_data.company
+        
+        # Update parsed_data with final values
+        parsed_data.title = final_title
+        parsed_data.company = final_company
+        
+        status = "parsed"
+        error_message = None
+        
+    except Exception as e:
+        logger.error(f"Failed to parse JD file {file.filename}: {e}")
+        # Fall back to basic info
+        final_title = title if title and title.strip() else file.filename
+        final_company = company if company and company.strip() else None
+        parsed_data = None
+        status = "failed"
+        error_message = str(e)
+    
+    # Create document record
+    doc = JobDescriptionDocument(
+        title=final_title,
+        company=final_company,
+        filename=file.filename,
+        storage_key=storage_key,
+        content_type=file.content_type,
+        file_size=file_size,
+        parsed_data=parsed_data,
+        status=status,
+        error_message=error_message,
+    )
+    
+    # Insert into database
+    doc_dict = doc.model_dump(by_alias=True, exclude={"id"})
+    if parsed_data:
+        doc_dict["raw_text"] = parsed_data.raw_text
+    
+    result = await mongodb_client.job_descriptions.insert_one(doc_dict)
+    doc_id = str(result.inserted_id)
+    
+    logger.info(f"Job description uploaded: {file.filename} -> {doc_id} (status: {status})")
+    
+    return JobDescriptionUploadResponse(
+        id=doc_id,
+        title=final_title,
+        company=final_company,
+        filename=file.filename,
+        status=status,
+        message=f"Job description uploaded and {'parsed successfully' if status == 'parsed' else 'parsing failed: ' + (error_message or 'unknown error')}",
+        parsed_data=parsed_data,
     )
 
 

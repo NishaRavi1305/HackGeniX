@@ -153,6 +153,23 @@ def create_jd(title: str, company: str, description: str) -> str:
     return format_json(result)
 
 
+def upload_jd(file, title: str, company: str) -> str:
+    """Upload a job description PDF/DOCX file."""
+    if not api_client.auth.is_authenticated:
+        return "Error: Not authenticated"
+    if file is None:
+        return "Error: No file selected"
+    
+    # Title and company are optional - will be extracted from PDF if not provided
+    result = run_async(api_client.upload_job_description(
+        file.name,
+        os.path.basename(file.name),
+        title=title if title and title.strip() else None,
+        company=company if company and company.strip() else None,
+    ))
+    return format_json(result)
+
+
 def list_jds() -> str:
     """List all job descriptions."""
     if not api_client.auth.is_authenticated:
@@ -546,21 +563,43 @@ def create_app():
                     
                     with gr.Column():
                         gr.Markdown("#### Create Job Description")
-                        jd_title = gr.Textbox(label="Job Title", placeholder="Senior Python Developer")
-                        jd_company = gr.Textbox(label="Company", placeholder="TechCorp Inc")
-                        jd_description = gr.Textbox(
-                            label="Description",
-                            lines=5,
-                            placeholder="We are looking for...",
-                        )
-                        create_jd_btn = gr.Button("Create JD")
-                        jd_result = gr.Textbox(label="Result", lines=5)
                         
-                        create_jd_btn.click(
-                            create_jd,
-                            inputs=[jd_title, jd_company, jd_description],
-                            outputs=[jd_result],
-                        )
+                        with gr.Tabs():
+                            with gr.Tab("Upload PDF"):
+                                jd_file = gr.File(label="Job Description (PDF/DOCX)", file_types=[".pdf", ".docx", ".doc"])
+                                jd_upload_title = gr.Textbox(
+                                    label="Job Title (optional)",
+                                    placeholder="Leave empty to extract from PDF",
+                                )
+                                jd_upload_company = gr.Textbox(
+                                    label="Company (optional)",
+                                    placeholder="Leave empty to extract from PDF",
+                                )
+                                upload_jd_btn = gr.Button("Upload & Parse JD", variant="primary")
+                                jd_upload_result = gr.Textbox(label="Result", lines=8)
+                                
+                                upload_jd_btn.click(
+                                    upload_jd,
+                                    inputs=[jd_file, jd_upload_title, jd_upload_company],
+                                    outputs=[jd_upload_result],
+                                )
+                            
+                            with gr.Tab("Enter Manually"):
+                                jd_title = gr.Textbox(label="Job Title", placeholder="Senior Python Developer")
+                                jd_company = gr.Textbox(label="Company", placeholder="TechCorp Inc")
+                                jd_description = gr.Textbox(
+                                    label="Description",
+                                    lines=5,
+                                    placeholder="We are looking for...",
+                                )
+                                create_jd_btn = gr.Button("Create JD")
+                                jd_result = gr.Textbox(label="Result", lines=5)
+                                
+                                create_jd_btn.click(
+                                    create_jd,
+                                    inputs=[jd_title, jd_company, jd_description],
+                                    outputs=[jd_result],
+                                )
                 
                 gr.Markdown("---")
                 

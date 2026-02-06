@@ -112,6 +112,8 @@ class JobDescriptionDocument(BaseModel):
     company: Optional[str] = None
     filename: Optional[str] = None
     storage_key: Optional[str] = None
+    content_type: Optional[str] = None
+    file_size: Optional[int] = None
     parsed_data: Optional[ParsedJobDescription] = None
     embedding: Optional[List[float]] = None
     status: str = "pending"
@@ -138,6 +140,17 @@ class JobDescriptionCreateRequest(BaseModel):
     title: str
     company: Optional[str] = None
     description: str
+
+
+class JobDescriptionUploadResponse(BaseModel):
+    """Response after uploading a job description file."""
+    id: str
+    title: str
+    company: Optional[str] = None
+    filename: str
+    status: str
+    message: str
+    parsed_data: Optional[ParsedJobDescription] = None
 
 
 class JobDescriptionResponse(BaseModel):
