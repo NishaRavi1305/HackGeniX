@@ -1,0 +1,56 @@
+# Model Configuration - Swap models by changing these values
+# No code changes required
+
+providers:
+  llm:
+    provider: "vllm"  # Options: vllm, ollama, llamacpp, openai-compatible
+    model: "meta-llama/Llama-3.1-8B-Instruct"
+    quantization: "awq-4bit"  # Options: none, gptq-4bit, awq-4bit, int8
+    max_context_length: 8192
+    gpu_memory_utilization: 0.85
+    # Upgrade option (uncomment to use):
+    # model: "Qwen/Qwen2.5-32B-Instruct-AWQ"
+    # quantization: "awq-4bit"
+    
+  embeddings:
+    provider: "sentence-transformers"  # Options: sentence-transformers, huggingface
+    model: "BAAI/bge-large-en-v1.5"
+    dimensions: 1024
+    device: "cuda"
+    # Downgrade option for lower VRAM:
+    # model: "sentence-transformers/all-MiniLM-L6-v2"
+    # dimensions: 384
+    
+  stt:
+    provider: "faster-whisper"  # Options: whisper, faster-whisper
+    model: "large-v3"
+    compute_type: "int8"  # Options: float16, int8, int8_float16
+    device: "cuda"
+    language: "en"  # Force language or "auto" for detection
+    vad_filter: true
+    # Lighter option:
+    # model: "medium"
+    # compute_type: "int8"
+    
+  tts:
+    provider: "coqui-xtts"  # Options: coqui-xtts, piper, styletts2
+    model: "tts_models/multilingual/multi-dataset/xtts_v2"
+    device: "cuda"
+    reference_audio: "assets/interviewer_voice.wav"
+    # Faster/lighter alternative:
+    # provider: "piper"
+    # model: "en_US-lessac-medium"
+
+# Fallback configuration
+fallbacks:
+  tts:
+    - provider: "piper"
+      model: "en_US-lessac-medium"
+      trigger: "latency > 3000ms"  # Use fallback if primary is slow
+
+# Resource limits
+resources:
+  max_concurrent_stt: 4
+  max_concurrent_tts: 2
+  stt_timeout_ms: 10000
+  tts_timeout_ms: 8000

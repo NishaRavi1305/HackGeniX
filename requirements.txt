@@ -1,0 +1,68 @@
+# AI Agentic Interviewer System - Requirements
+# Python 3.11
+
+# ============= Core Backend =============
+fastapi[all]==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-multipart==0.0.6
+
+# ============= Database =============
+motor==3.3.2  # Async MongoDB driver
+pymongo==4.6.0
+redis==5.0.1
+
+# ============= Storage =============
+boto3==1.34.0  # S3/MinIO
+python-dotenv==1.0.0
+
+# ============= Document Processing =============
+pypdf2==3.0.1
+pdfplumber==0.10.3
+python-docx==1.1.0
+
+# ============= NLP & Embeddings =============
+spacy==3.7.2
+sentence-transformers==2.2.2
+torch>=2.0.0  # Required for sentence-transformers
+
+# ============= LLM Inference =============
+# vllm requires CUDA - install separately if GPU available
+# vllm==0.2.7
+openai==1.6.0  # For OpenAI-compatible API interface
+
+# ============= Voice Processing =============
+# These require additional system deps - install separately
+# openai-whisper==20231117
+# TTS==0.21.1
+faster-whisper==0.10.0
+soundfile==0.12.1
+pydub==0.25.1
+numpy>=1.24.0
+
+# ============= Report Generation =============
+reportlab==4.0.7
+
+# ============= Text Analysis =============
+nltk==3.8.1
+textblob==0.17.1
+
+# ============= Utilities =============
+httpx==0.26.0
+aiofiles==23.2.1
+python-jose[cryptography]==3.3.0  # JWT
+passlib[bcrypt]==1.7.4  # Password hashing
+tenacity==8.2.3  # Retry logic
+structlog==23.2.0  # Structured logging
+
+# ============= Testing =============
+pytest==7.4.3
+pytest-asyncio==0.23.2
+pytest-cov==4.1.0
+httpx==0.26.0  # For TestClient
+
+# ============= Dev Tools =============
+black==23.12.0
+isort==5.13.2
+mypy==1.7.1
