@@ -38,9 +38,9 @@ async def lifespan(app: FastAPI):
     await mongodb_client.connect()
     logger.info("MongoDB connection established")
     
-    # Initialize S3/MinIO storage
+    # Initialize S3/MinIO storage (with local fallback)
     await storage_client.initialize()
-    logger.info("Storage client initialized")
+    logger.info(f"Storage initialized (backend: {storage_client.storage_type})")
     
     yield
     
