@@ -1,0 +1,828 @@
+"""
+Interview Orchestrator Service.
+
+Central controller that manages complete interview sessions from start to finish.
+Coordinates question generation, answer evaluation, and adaptive flow control.
+"""
+import asyncio
+import base64
+import logging
+import uuid
+from datetime import datetime
+from typing import Dict, List, Optional, Any, Tuple
+from pathlib import Path
+import tempfile
+
+from src.models.interview import (
+    InterviewSession,
+    InterviewConfig,
+    InterviewStatus,
+    InterviewStage,
+    InterviewMode,
+    InterviewQuestion,
+    AnswerRecord,
+    StageProgress,
+    QuestionStatus,
+    StartInterviewResponse,
+    SubmitAnswerResponse,
+    InterviewProgressResponse,
+    InterviewReportResponse,
+)
+from src.models.documents import ParsedResume, ParsedJobDescription
+from src.services.question_generator import (
+    QuestionGenerator,
+    QuestionGenerationRequest,
+    GeneratedQuestion,
+    get_question_generator,
+)
+from src.services.answer_evaluator import (
+    AnswerEvaluator,
+    AnswerEvaluation,
+    InterviewReport,
+    get_answer_evaluator,
+)
+from src.services.prompts import (
+    InterviewStage as PromptStage,
+    QuestionDifficulty,
+)
+
+logger = logging.getLogger(__name__)
+
+
+# Stage order for interview flow
+STAGE_ORDER = [
+    InterviewStage.SCREENING,
+    InterviewStage.TECHNICAL,
+    InterviewStage.BEHAVIORAL,
+    InterviewStage.SYSTEM_DESIGN,
+    InterviewStage.WRAP_UP,
+]
+
+
+def _get_enum_value(val):
+    """Get string value from enum or string (handles Pydantic use_enum_values)."""
+    return val.value if hasattr(val, 'value') else val
+
+
+class InterviewOrchestrator:
+    """
+    Manages complete interview sessions from start to finish.
+    
+    Responsibilities:
+    - Initialize interview with questions based on resume/JD
+    - Track interview state (stage, question, time)
+    - Submit answers and get evaluations
+    - Adapt difficulty based on performance
+    - Generate follow-up questions
+    - Create final interview reports
+    """
+    
+    def __init__(
+        self,
+        question_generator: Optional[QuestionGenerator] = None,
+        answer_evaluator: Optional[AnswerEvaluator] = None,
+    ):
+        """
+        Initialize the orchestrator.
+        
+        Args:
+            question_generator: Question generation service
+            answer_evaluator: Answer evaluation service
+        """
+        self._question_generator = question_generator
+        self._answer_evaluator = answer_evaluator
+        
+        # In-memory session storage (replace with DB in production)
+        self._sessions: Dict[str, InterviewSession] = {}
+        
+        # Voice providers (lazy loaded)
+        self._stt_provider = None
+        self._tts_provider = None
+    
+    @property
+    def question_generator(self) -> QuestionGenerator:
+        if self._question_generator is None:
+            self._question_generator = get_question_generator()
+        return self._question_generator
+    
+    @property
+    def answer_evaluator(self) -> AnswerEvaluator:
+        if self._answer_evaluator is None:
+            self._answer_evaluator = get_answer_evaluator()
+        return self._answer_evaluator
+    
+    async def _get_stt_provider(self):
+        """Get STT provider (lazy load)."""
+        if self._stt_provider is None:
+            from src.providers.stt import get_faster_whisper_provider_async
+            self._stt_provider = await get_faster_whisper_provider_async()
+        return self._stt_provider
+    
+    async def _get_tts_provider(self):
+        """Get TTS provider (lazy load)."""
+        if self._tts_provider is None:
+            from src.providers.tts import get_tts_provider_async
+            self._tts_provider = await get_tts_provider_async()
+        return self._tts_provider
+    
+    def _stage_to_prompt_stage(self, stage: InterviewStage) -> PromptStage:
+        """Convert interview stage to prompt stage enum."""
+        return PromptStage(stage.value)
+    
+    def _get_stage_question_count(self, config: InterviewConfig, stage: InterviewStage) -> int:
+        """Get the number of questions for a stage from config."""
+        counts = {
+            InterviewStage.SCREENING: config.screening_questions,
+            InterviewStage.TECHNICAL: config.technical_questions,
+            InterviewStage.BEHAVIORAL: config.behavioral_questions,
+            InterviewStage.SYSTEM_DESIGN: config.system_design_questions,
+            InterviewStage.WRAP_UP: 1,  # Always 1 wrap-up question
+        }
+        return counts.get(stage, 3)
+    
+    async def _generate_stage_questions(
+        self,
+        stage: InterviewStage,
+        resume: ParsedResume,
+        jd: ParsedJobDescription,
+        config: InterviewConfig,
+        previous_questions: List[str] = None,
+    ) -> List[InterviewQuestion]:
+        """Generate questions for a specific stage."""
+        num_questions = self._get_stage_question_count(config, stage)
+        
+        if stage == InterviewStage.WRAP_UP:
+            # Simple wrap-up question
+            return [InterviewQuestion(
+                id=str(uuid.uuid4()),
+                question_text="Is there anything else you'd like to share about your experience or ask about the role?",
+                stage=stage,
+                difficulty="easy",
+                category="wrap_up",
+                purpose="Allow candidate to add final thoughts and ask questions",
+                expected_answer_points=["Shows interest in role", "Asks thoughtful questions"],
+                duration_seconds=180,
+            )]
+        
+        # Map to difficulty based on stage
+        difficulty_map = {
+            InterviewStage.SCREENING: QuestionDifficulty.EASY,
+            InterviewStage.TECHNICAL: QuestionDifficulty.MEDIUM,
+            InterviewStage.BEHAVIORAL: QuestionDifficulty.MEDIUM,
+            InterviewStage.SYSTEM_DESIGN: QuestionDifficulty.HARD,
+        }
+        
+        request = QuestionGenerationRequest(
+            stage=self._stage_to_prompt_stage(stage),
+            num_questions=num_questions,
+            difficulty=difficulty_map.get(stage, QuestionDifficulty.MEDIUM),
+            focus_areas=config.focus_skills,
+            exclude_topics=config.exclude_topics,
+        )
+        
+        try:
+            generated = await self.question_generator.generate_questions(
+                request=request,
+                resume=resume,
+                jd=jd,
+                previous_questions=previous_questions,
+            )
+            
+            # Convert to InterviewQuestion models
+            questions = []
+            for gq in generated:
+                questions.append(InterviewQuestion(
+                    id=str(uuid.uuid4()),
+                    question_text=gq.question,
+                    stage=stage,
+                    difficulty=gq.difficulty.value,
+                    category=gq.category,
+                    purpose=gq.purpose,
+                    expected_answer_points=gq.expected_answer_points,
+                    follow_up_questions=gq.follow_up_questions,
+                    duration_seconds=gq.duration_seconds,
+                    competency=gq.competency,
+                ))
+            
+            return questions
+            
+        except Exception as e:
+            logger.error(f"Failed to generate {stage.value} questions: {e}")
+            # Return fallback questions
+            return self._get_fallback_questions(stage, num_questions)
+    
+    def _get_fallback_questions(self, stage: InterviewStage, count: int) -> List[InterviewQuestion]:
+        """Get fallback questions if generation fails."""
+        fallbacks = {
+            InterviewStage.SCREENING: [
+                "Tell me about yourself and your background.",
+                "What interests you about this position?",
+                "What are your key technical strengths?",
+            ],
+            InterviewStage.TECHNICAL: [
+                "Describe a challenging technical problem you've solved recently.",
+                "How do you approach debugging complex issues?",
+                "Explain a system you've designed or contributed to significantly.",
+                "What's your experience with testing and code quality?",
+                "How do you stay current with technology trends?",
+            ],
+            InterviewStage.BEHAVIORAL: [
+                "Tell me about a time you had to work with a difficult team member.",
+                "Describe a situation where you had to meet a tight deadline.",
+                "Give an example of when you had to learn something quickly.",
+            ],
+            InterviewStage.SYSTEM_DESIGN: [
+                "How would you design a URL shortening service?",
+            ],
+        }
+        
+        stage_fallbacks = fallbacks.get(stage, ["Tell me about your experience."])[:count]
+        
+        return [
+            InterviewQuestion(
+                id=str(uuid.uuid4()),
+                question_text=q,
+                stage=stage,
+                difficulty="medium",
+                purpose="Fallback question",
+                expected_answer_points=[],
+            )
+            for q in stage_fallbacks
+        ]
+    
+    async def start_interview(
+        self,
+        resume: ParsedResume,
+        jd: ParsedJobDescription,
+        resume_id: str,
+        jd_id: str,
+        config: Optional[InterviewConfig] = None,
+    ) -> Tuple[InterviewSession, StartInterviewResponse]:
+        """
+        Start a new interview session.
+        
+        Args:
+            resume: Parsed candidate resume
+            jd: Parsed job description
+            resume_id: ID of the resume document
+            jd_id: ID of the job description document
+            config: Optional interview configuration
+            
+        Returns:
+            Tuple of (InterviewSession, StartInterviewResponse)
+        """
+        config = config or InterviewConfig()
+        session_id = str(uuid.uuid4())
+        
+        # Extract candidate name from resume
+        candidate_name = "Candidate"
+        if resume.contact and resume.contact.name:
+            candidate_name = resume.contact.name
+        
+        role_title = jd.title or "Software Engineer"
+        
+        # Initialize session
+        session = InterviewSession(
+            id=session_id,
+            resume_id=resume_id,
+            job_description_id=jd_id,
+            candidate_name=candidate_name,
+            role_title=role_title,
+            config=config,
+            status=InterviewStatus.CREATED,
+            current_stage=InterviewStage.SCREENING,
+        )
+        
+        # Initialize stage progress
+        for stage in STAGE_ORDER:
+            if stage == InterviewStage.WRAP_UP:
+                continue  # Skip wrap-up in progress tracking
+            count = self._get_stage_question_count(config, stage)
+            if count > 0:
+                session.stage_progress[stage.value] = StageProgress(
+                    stage=stage,
+                    total_questions=count,
+                )
+        
+        # Generate initial questions for first stage (screening)
+        logger.info(f"Generating screening questions for session {session_id}")
+        screening_questions = await self._generate_stage_questions(
+            stage=InterviewStage.SCREENING,
+            resume=resume,
+            jd=jd,
+            config=config,
+        )
+        session.questions.extend(screening_questions)
+        
+        # Pre-generate technical questions (async in background for better UX)
+        # For now, generate them upfront
+        logger.info(f"Generating technical questions for session {session_id}")
+        technical_questions = await self._generate_stage_questions(
+            stage=InterviewStage.TECHNICAL,
+            resume=resume,
+            jd=jd,
+            config=config,
+            previous_questions=[q.question_text for q in screening_questions],
+        )
+        session.questions.extend(technical_questions)
+        
+        # Generate behavioral questions
+        logger.info(f"Generating behavioral questions for session {session_id}")
+        behavioral_questions = await self._generate_stage_questions(
+            stage=InterviewStage.BEHAVIORAL,
+            resume=resume,
+            jd=jd,
+            config=config,
+            previous_questions=[q.question_text for q in session.questions],
+        )
+        session.questions.extend(behavioral_questions)
+        
+        # Generate system design if configured
+        if config.system_design_questions > 0:
+            logger.info(f"Generating system design questions for session {session_id}")
+            sd_questions = await self._generate_stage_questions(
+                stage=InterviewStage.SYSTEM_DESIGN,
+                resume=resume,
+                jd=jd,
+                config=config,
+                previous_questions=[q.question_text for q in session.questions],
+            )
+            session.questions.extend(sd_questions)
+        
+        # Add wrap-up
+        wrap_up = await self._generate_stage_questions(
+            stage=InterviewStage.WRAP_UP,
+            resume=resume,
+            jd=jd,
+            config=config,
+        )
+        session.questions.extend(wrap_up)
+        
+        # Synthesize first question audio if voice mode
+        first_question = session.current_question
+        if config.mode in [InterviewMode.VOICE, InterviewMode.HYBRID] and first_question:
+            await self._synthesize_question_audio(first_question, config)
+        
+        # Mark session as in progress
+        session.status = InterviewStatus.IN_PROGRESS
+        session.started_at = datetime.utcnow()
+        session.last_activity_at = datetime.utcnow()
+        
+        # Store session
+        self._sessions[session_id] = session
+        
+        logger.info(f"Interview session {session_id} started with {len(session.questions)} questions")
+        
+        response = StartInterviewResponse(
+            session_id=session_id,
+            status=_get_enum_value(session.status),
+            current_stage=_get_enum_value(session.current_stage),
+            first_question=first_question,
+            total_questions=len(session.questions),
+            message=f"Interview started. {len(session.questions)} questions prepared across {len(session.stage_progress)} stages.",
+        )
+        
+        return session, response
+    
+    async def _synthesize_question_audio(
+        self,
+        question: InterviewQuestion,
+        config: InterviewConfig,
+    ) -> Optional[str]:
+        """Synthesize audio for a question using TTS."""
+        try:
+            tts = await self._get_tts_provider()
+            audio_data = await tts.synthesize(
+                text=question.question_text,
+                voice=config.tts_voice,
+            )
+            
+            # Save to temp file
+            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
+                f.write(audio_data)
+                question.audio_path = f.name
+                return f.name
+                
+        except Exception as e:
+            logger.warning(f"Failed to synthesize question audio: {e}")
+            return None
+    
+    async def _transcribe_audio(
+        self,
+        audio_base64: str,
+        context: Optional[List[str]] = None,
+    ) -> str:
+        """Transcribe audio answer using STT."""
+        try:
+            stt = await self._get_stt_provider()
+            
+            # Decode base64 audio
+            audio_data = base64.b64decode(audio_base64)
+            
+            # Save to temp file
+            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
+                f.write(audio_data)
+                audio_path = f.name
+            
+            # Transcribe
+            result = await stt.transcribe(audio_path, context=context)
+            
+            # Clean up temp file
+            Path(audio_path).unlink(missing_ok=True)
+            
+            return result.text
+            
+        except Exception as e:
+            logger.error(f"Failed to transcribe audio: {e}")
+            raise ValueError(f"Audio transcription failed: {e}")
+    
+    def get_session(self, session_id: str) -> Optional[InterviewSession]:
+        """Get an interview session by ID."""
+        return self._sessions.get(session_id)
+    
+    def _get_next_stage(self, current_stage: InterviewStage) -> Optional[InterviewStage]:
+        """Get the next stage in the interview flow."""
+        try:
+            current_idx = STAGE_ORDER.index(current_stage)
+            if current_idx < len(STAGE_ORDER) - 1:
+                return STAGE_ORDER[current_idx + 1]
+        except ValueError:
+            pass
+        return None
+    
+    def _update_performance_tracking(self, session: InterviewSession, evaluation: AnswerEvaluation):
+        """Update performance tracking based on latest evaluation."""
+        # Update strong/weak areas based on category
+        score = evaluation.scores.overall
+        category = getattr(evaluation, 'category', None) or _get_enum_value(evaluation.stage)
+        
+        if score >= 80 and category not in session.strong_areas:
+            session.strong_areas.append(category)
+        elif score < 60 and category not in session.weak_areas:
+            session.weak_areas.append(category)
+        
+        # Calculate trend
+        recent_scores = [a.scores.get("overall", 0) for a in session.answers[-5:]]
+        if len(recent_scores) >= 3:
+            avg_recent = sum(recent_scores[-3:]) / 3
+            avg_older = sum(recent_scores[:-3]) / max(len(recent_scores[:-3]), 1)
+            
+            if avg_recent > avg_older + 5:
+                session.performance_trend = "improving"
+            elif avg_recent < avg_older - 5:
+                session.performance_trend = "declining"
+            else:
+                session.performance_trend = "stable"
+    
+    async def submit_answer(
+        self,
+        session_id: str,
+        answer_text: Optional[str] = None,
+        answer_audio_base64: Optional[str] = None,
+    ) -> SubmitAnswerResponse:
+        """
+        Submit an answer for the current question.
+        
+        Args:
+            session_id: Interview session ID
+            answer_text: Text answer (for text mode)
+            answer_audio_base64: Base64 encoded audio (for voice mode)
+            
+        Returns:
+            SubmitAnswerResponse with evaluation and next question
+        """
+        session = self.get_session(session_id)
+        if not session:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        if session.status != InterviewStatus.IN_PROGRESS:
+            raise ValueError(f"Session is not in progress: {session.status}")
+        
+        current_question = session.current_question
+        if not current_question:
+            raise ValueError("No pending questions in session")
+        
+        # Transcribe audio if provided
+        if answer_audio_base64 and not answer_text:
+            context = session.config.focus_skills or []
+            answer_text = await self._transcribe_audio(answer_audio_base64, context)
+        
+        if not answer_text:
+            raise ValueError("No answer provided")
+        
+        # Evaluate the answer
+        stage_enum = self._stage_to_prompt_stage(InterviewStage(current_question.stage))
+        
+        if stage_enum == PromptStage.BEHAVIORAL and current_question.competency:
+            evaluation = await self.answer_evaluator.evaluate_behavioral_answer(
+                question=current_question.question_text,
+                answer=answer_text,
+                competency=current_question.competency,
+                red_flags=[],
+                green_flags=[],
+                validate=True,
+            )
+        else:
+            evaluation = await self.answer_evaluator.evaluate_answer(
+                question=current_question.question_text,
+                answer=answer_text,
+                expected_points=current_question.expected_answer_points,
+                stage=stage_enum,
+                validate=True,
+            )
+        
+        # Record the answer
+        answer_record = AnswerRecord(
+            question_id=current_question.id,
+            question_text=current_question.question_text,
+            stage=InterviewStage(current_question.stage),
+            answer_text=answer_text,
+            scores=evaluation.scores.to_dict(),
+            strengths=evaluation.strengths,
+            improvements=evaluation.improvements,
+            follow_up_question=evaluation.follow_up_question,
+            recommendation=evaluation.recommendation.value,
+            asked_at=datetime.utcnow(),  # TODO: track actual ask time
+            answered_at=datetime.utcnow(),
+        )
+        session.answers.append(answer_record)
+        
+        # Mark question as answered
+        current_question.status = QuestionStatus.ANSWERED
+        
+        # Update stage progress
+        current_stage = InterviewStage(current_question.stage)
+        if current_stage.value in session.stage_progress:
+            progress = session.stage_progress[current_stage.value]
+            progress.answered_questions += 1
+            
+            # Update average score
+            stage_answers = session.get_stage_answers(current_stage)
+            if stage_answers:
+                scores = [a.scores.get("overall", 0) for a in stage_answers]
+                progress.average_score = sum(scores) / len(scores)
+        
+        # Update performance tracking
+        self._update_performance_tracking(session, evaluation)
+        
+        # Determine next action
+        session.last_activity_at = datetime.utcnow()
+        
+        # Check for follow-up
+        follow_up_question = None
+        if session.config.enable_follow_ups and evaluation.follow_up_question:
+            # Could add follow-up logic here
+            follow_up_question = evaluation.follow_up_question
+        
+        # Get next question
+        next_question = session.current_question
+        stage_changed = False
+        interview_complete = False
+        
+        if next_question:
+            next_stage = InterviewStage(next_question.stage)
+            if next_stage != current_stage:
+                stage_changed = True
+                session.current_stage = next_stage
+                
+                # Mark previous stage as complete
+                if current_stage.value in session.stage_progress:
+                    session.stage_progress[current_stage.value].completed_at = datetime.utcnow()
+                
+                # Mark new stage as started
+                if next_stage.value in session.stage_progress:
+                    session.stage_progress[next_stage.value].started_at = datetime.utcnow()
+                
+                logger.info(f"Session {session_id}: Stage transition {current_stage.value} -> {next_stage.value}")
+            
+            # Synthesize audio for next question if voice mode
+            if session.config.mode in [InterviewMode.VOICE, InterviewMode.HYBRID]:
+                await self._synthesize_question_audio(next_question, session.config)
+        else:
+            # No more questions - interview complete
+            interview_complete = True
+            session.status = InterviewStatus.COMPLETED
+            session.completed_at = datetime.utcnow()
+            logger.info(f"Session {session_id}: Interview completed")
+        
+        # Calculate progress
+        total_questions = len(session.questions)
+        answered = len(session.answers)
+        progress_percent = (answered / total_questions * 100) if total_questions > 0 else 0
+        
+        response = SubmitAnswerResponse(
+            session_id=session_id,
+            status=_get_enum_value(session.status),
+            evaluation=evaluation.to_dict(),
+            next_question=next_question,
+            follow_up_question=follow_up_question,
+            current_stage=_get_enum_value(session.current_stage),
+            questions_answered=answered,
+            total_questions=total_questions,
+            progress_percent=progress_percent,
+            stage_changed=stage_changed,
+            interview_complete=interview_complete,
+            message="Answer evaluated." + (
+                " Interview complete!" if interview_complete else
+                f" Moving to {_get_enum_value(session.current_stage)} stage." if stage_changed else
+                ""
+            ),
+        )
+        
+        return response
+    
+    def get_progress(self, session_id: str) -> InterviewProgressResponse:
+        """Get current interview progress."""
+        session = self.get_session(session_id)
+        if not session:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        # Calculate stage scores
+        stage_scores = {}
+        for stage_name, progress in session.stage_progress.items():
+            if progress.answered_questions > 0:
+                stage_scores[stage_name] = progress.average_score
+        
+        return InterviewProgressResponse(
+            session_id=session_id,
+            status=_get_enum_value(session.status),
+            current_stage=_get_enum_value(session.current_stage),
+            questions_answered=len(session.answers),
+            total_questions=len(session.questions),
+            progress_percent=(len(session.answers) / len(session.questions) * 100) if session.questions else 0,
+            current_score=session.overall_score,
+            stage_scores=stage_scores,
+            duration_minutes=session.duration_minutes,
+            current_question=session.current_question,
+        )
+    
+    async def end_interview(
+        self,
+        session_id: str,
+        reason: Optional[str] = None,
+    ) -> InterviewReportResponse:
+        """
+        End an interview early and generate the report.
+        
+        Args:
+            session_id: Interview session ID
+            reason: Optional reason for ending early
+            
+        Returns:
+            Complete interview report
+        """
+        session = self.get_session(session_id)
+        if not session:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        # Mark as completed or cancelled
+        if session.status == InterviewStatus.IN_PROGRESS:
+            if len(session.answers) == 0:
+                session.status = InterviewStatus.CANCELLED
+            else:
+                session.status = InterviewStatus.COMPLETED
+            session.completed_at = datetime.utcnow()
+        
+        if reason:
+            session.error_message = f"Ended early: {reason}"
+        
+        return await self.generate_report(session_id)
+    
+    async def generate_report(self, session_id: str) -> InterviewReportResponse:
+        """
+        Generate a comprehensive interview report.
+        
+        Args:
+            session_id: Interview session ID
+            
+        Returns:
+            Complete interview report
+        """
+        session = self.get_session(session_id)
+        if not session:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        if len(session.answers) == 0:
+            return InterviewReportResponse(
+                session_id=session_id,
+                candidate_name=session.candidate_name or "Unknown",
+                role_title=session.role_title or "Unknown",
+                duration_minutes=session.duration_minutes,
+                overall_score=0,
+                technical_score=0,
+                behavioral_score=0,
+                communication_score=0,
+                executive_summary="Interview ended with no answers recorded.",
+                recommendation="no_hire",
+                confidence=0,
+                reasoning="Insufficient data to evaluate candidate.",
+                question_evaluations=[],
+            )
+        
+        # Convert answer records to AnswerEvaluation objects for report generation
+        from src.services.answer_evaluator import EvaluationScores, AnswerStrength
+        
+        evaluations = []
+        for answer in session.answers:
+            stage_enum = PromptStage(answer.stage.value if hasattr(answer.stage, 'value') else answer.stage)
+            
+            eval_obj = AnswerEvaluation(
+                question=answer.question_text,
+                answer=answer.answer_text,
+                stage=stage_enum,
+                scores=EvaluationScores.from_dict(answer.scores),
+                strengths=answer.strengths,
+                improvements=answer.improvements,
+                follow_up_question=answer.follow_up_question,
+                recommendation=AnswerStrength(answer.recommendation),
+            )
+            evaluations.append(eval_obj)
+        
+        # Generate report using evaluator
+        report = await self.answer_evaluator.generate_interview_report(
+            candidate_name=session.candidate_name or "Candidate",
+            role_title=session.role_title or "Software Engineer",
+            duration_minutes=session.duration_minutes,
+            evaluations=evaluations,
+        )
+        
+        return InterviewReportResponse(
+            session_id=session_id,
+            candidate_name=report.candidate_name,
+            role_title=report.role_title,
+            duration_minutes=report.duration_minutes,
+            overall_score=report.overall_score,
+            technical_score=report.technical_score,
+            behavioral_score=report.behavioral_score,
+            communication_score=report.communication_score,
+            executive_summary=report.executive_summary,
+            strengths=report.strengths,
+            concerns=report.concerns,
+            recommendation=_get_enum_value(report.recommendation),
+            confidence=report.confidence,
+            reasoning=report.reasoning,
+            next_steps=report.next_steps,
+            question_evaluations=[e.to_dict() for e in report.evaluations],
+        )
+    
+    def pause_interview(self, session_id: str) -> InterviewSession:
+        """Pause an interview session."""
+        session = self.get_session(session_id)
+        if not session:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        if session.status == InterviewStatus.IN_PROGRESS:
+            session.status = InterviewStatus.PAUSED
+            session.last_activity_at = datetime.utcnow()
+            logger.info(f"Session {session_id} paused")
+        
+        return session
+    
+    def resume_interview(self, session_id: str) -> InterviewSession:
+        """Resume a paused interview session."""
+        session = self.get_session(session_id)
+        if not session:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        if session.status == InterviewStatus.PAUSED:
+            session.status = InterviewStatus.IN_PROGRESS
+            session.last_activity_at = datetime.utcnow()
+            logger.info(f"Session {session_id} resumed")
+        
+        return session
+    
+    def list_sessions(
+        self,
+        status: Optional[InterviewStatus] = None,
+        limit: int = 50,
+    ) -> List[InterviewSession]:
+        """List interview sessions, optionally filtered by status."""
+        sessions = list(self._sessions.values())
+        
+        if status:
+            sessions = [s for s in sessions if s.status == status]
+        
+        # Sort by last activity (most recent first)
+        sessions.sort(key=lambda s: s.last_activity_at, reverse=True)
+        
+        return sessions[:limit]
+    
+    def delete_session(self, session_id: str) -> bool:
+        """Delete an interview session."""
+        if session_id in self._sessions:
+            del self._sessions[session_id]
+            logger.info(f"Session {session_id} deleted")
+            return True
+        return False
+
+
+# Global instance (lazy loaded)
+_orchestrator: Optional[InterviewOrchestrator] = None
+
+
+def get_interview_orchestrator() -> InterviewOrchestrator:
+    """Get or create the interview orchestrator instance."""
+    global _orchestrator
+    if _orchestrator is None:
+        _orchestrator = InterviewOrchestrator()
+    return _orchestrator

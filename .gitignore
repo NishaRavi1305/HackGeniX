@@ -68,7 +68,7 @@ dmypy.json
 !assets/*.wav
 
 # Model weights (download separately)
-models/
+/models/
 *.bin
 *.safetensors
 *.gguf
