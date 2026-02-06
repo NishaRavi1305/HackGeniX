@@ -47,7 +47,7 @@ class LLMProviderFactory:
         
         # Use provided values or fall back to config
         provider_type = provider_type or llm_config.get("provider", "ollama")
-        model = model or llm_config.get("model", "llama3.1:8b")
+        model = model or llm_config.get("model", "qwen2.5:3b")
         
         logger.info(f"Creating LLM provider: {provider_type} with model: {model}")
         
@@ -113,12 +113,12 @@ class LLMProviderFactory:
         logger.info(f"Falling back to {fallback_provider}")
         try:
             config = load_model_config()
-            fallback_model = config.get("providers", {}).get("llm", {}).get("model", "llama3.1:8b")
+            fallback_model = config.get("providers", {}).get("llm", {}).get("model", "qwen2.5:3b")
             
             # Convert model name for Ollama format if needed
             if fallback_provider == "ollama" and "/" in fallback_model:
-                # Convert "meta-llama/Llama-3.1-8B-Instruct" -> "llama3.1:8b"
-                fallback_model = "llama3.1:8b"
+                # Convert HuggingFace format to Ollama format
+                fallback_model = "qwen2.5:3b"
             
             provider = LLMProviderFactory.create(
                 fallback_provider,

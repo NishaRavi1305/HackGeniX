@@ -65,13 +65,22 @@ class EvaluationScores:
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "EvaluationScores":
-        return cls(
+        scores = cls(
             technical_accuracy=float(data.get("technical_accuracy", 0)),
             completeness=float(data.get("completeness", 0)),
             clarity=float(data.get("clarity", 0)),
             depth=float(data.get("depth", 0)),
             overall=float(data.get("overall", 0)),
         )
+        # Compute overall if not provided or zero
+        if scores.overall == 0 and any([scores.technical_accuracy, scores.completeness, scores.clarity, scores.depth]):
+            scores.overall = (
+                scores.technical_accuracy * 0.35 +
+                scores.completeness * 0.25 +
+                scores.clarity * 0.20 +
+                scores.depth * 0.20
+            )
+        return scores
 
 
 @dataclass
@@ -94,13 +103,17 @@ class STARScores:
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "STARScores":
-        return cls(
+        scores = cls(
             situation=float(data.get("situation", 0)),
             task=float(data.get("task", 0)),
             action=float(data.get("action", 0)),
             result=float(data.get("result", 0)),
             total=float(data.get("total", 0)),
         )
+        # Compute total if not provided or zero
+        if scores.total == 0:
+            scores.total = scores.situation + scores.task + scores.action + scores.result
+        return scores
 
 
 @dataclass
@@ -445,6 +458,33 @@ class AnswerEvaluator:
             logger.error(f"Failed to validate evaluation: {e}")
             return {"is_grounded": True, "issues": [], "confidence": 50}
     
+    def _score_to_recommendation(self, overall_score: float) -> Recommendation:
+        """Convert overall score to recommendation."""
+        if overall_score >= 85:
+            return Recommendation.STRONG_HIRE
+        elif overall_score >= 70:
+            return Recommendation.HIRE
+        elif overall_score >= 50:
+            return Recommendation.NO_HIRE
+        else:
+            return Recommendation.STRONG_NO_HIRE
+    
+    def _recommendation_matches_score(self, rec: Recommendation, score: float) -> bool:
+        """Check if recommendation is reasonable given the score."""
+        # STRONG_HIRE requires score >= 85
+        if rec == Recommendation.STRONG_HIRE and score < 85:
+            return False
+        # HIRE requires score >= 70
+        if rec == Recommendation.HIRE and score < 70:
+            return False
+        # NO_HIRE for scores 50-69 (shouldn't be used for high scores)
+        if rec == Recommendation.NO_HIRE and score >= 70:
+            return False
+        # STRONG_NO_HIRE for scores < 50
+        if rec == Recommendation.STRONG_NO_HIRE and score >= 50:
+            return False
+        return True
+    
     async def generate_interview_report(
         self,
         candidate_name: str,
@@ -554,9 +594,21 @@ class AnswerEvaluator:
                 report.executive_summary = summary_data.get("executive_summary", "")
                 report.strengths = summary_data.get("strengths", [])
                 report.concerns = summary_data.get("concerns", [])
-                report.recommendation = Recommendation(
-                    summary_data.get("recommendation", "no_hire")
-                )
+                
+                # Get LLM recommendation but validate against calculated score
+                llm_recommendation = summary_data.get("recommendation", "no_hire")
+                report.recommendation = Recommendation(llm_recommendation)
+                
+                # Sanity check: override recommendation if it contradicts the score
+                # This prevents LLM hallucinations from affecting hiring decisions
+                calculated_recommendation = self._score_to_recommendation(overall_score)
+                if not self._recommendation_matches_score(report.recommendation, overall_score):
+                    logger.warning(
+                        f"LLM recommendation '{report.recommendation.value}' overridden to "
+                        f"'{calculated_recommendation.value}' based on score {overall_score:.0f}"
+                    )
+                    report.recommendation = calculated_recommendation
+                
                 report.confidence = float(summary_data.get("confidence", 0))
                 report.reasoning = summary_data.get("reasoning", "")
                 report.next_steps = summary_data.get("next_steps", [])

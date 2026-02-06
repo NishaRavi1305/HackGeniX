@@ -65,6 +65,11 @@ class LLMResponse:
     @property
     def completion_tokens(self) -> int:
         return self.usage.get("completion_tokens", 0) if self.usage else 0
+    
+    @property
+    def tokens_used(self) -> int:
+        """Total tokens used (prompt + completion)."""
+        return self.usage.get("total_tokens", 0) if self.usage else 0
 
 
 class BaseLLMProvider(ABC):

@@ -3,14 +3,14 @@
 
 providers:
   llm:
-    provider: "vllm"  # Options: vllm, ollama, llamacpp, openai-compatible
-    model: "meta-llama/Llama-3.1-8B-Instruct"
-    quantization: "awq-4bit"  # Options: none, gptq-4bit, awq-4bit, int8
+    provider: "ollama"  # Options: vllm, ollama, llamacpp, openai-compatible
+    model: "qwen2.5:3b"  # Using Qwen 2.5 3B for RTX 4050 6GB VRAM
     max_context_length: 8192
-    gpu_memory_utilization: 0.85
-    # Upgrade option (uncomment to use):
-    # model: "Qwen/Qwen2.5-32B-Instruct-AWQ"
-    # quantization: "awq-4bit"
+    # vLLM config (uncomment when using vLLM):
+    # provider: "vllm"
+    # model: "meta-llama/Llama-3.1-8B-Instruct"
+    # quantization: "awq-4bit"  # Options: none, gptq-4bit, awq-4bit, int8
+    # gpu_memory_utilization: 0.85
     
   embeddings:
     provider: "sentence-transformers"  # Options: sentence-transformers, huggingface
