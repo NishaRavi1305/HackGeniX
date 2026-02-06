@@ -43,6 +43,17 @@ class AnswerStrength(str, Enum):
     ACCEPTABLE = "acceptable"
     WEAK = "weak"
     INSUFFICIENT = "insufficient"
+    
+    @classmethod
+    def from_string(cls, value: str) -> "AnswerStrength":
+        """Parse AnswerStrength from string, case-insensitive."""
+        if not value:
+            return cls.ACCEPTABLE
+        try:
+            return cls(value.lower())
+        except ValueError:
+            # Fallback to acceptable if unknown value
+            return cls.ACCEPTABLE
 
 
 @dataclass
@@ -302,7 +313,7 @@ class AnswerEvaluator:
                 strengths=eval_data.get("strengths", []),
                 improvements=eval_data.get("improvements", []),
                 follow_up_question=eval_data.get("follow_up_question"),
-                recommendation=AnswerStrength(eval_data.get("recommendation", "acceptable")),
+                recommendation=AnswerStrength.from_string(eval_data.get("recommendation", "acceptable")),
                 notes=eval_data.get("notes", ""),
             )
             
@@ -398,7 +409,7 @@ class AnswerEvaluator:
                 star_scores=STARScores.from_dict(eval_data.get("star_scores", {})),
                 strengths=eval_data.get("green_flags_detected", []),
                 improvements=eval_data.get("red_flags_detected", []),
-                recommendation=AnswerStrength(eval_data.get("recommendation", "acceptable")),
+                recommendation=AnswerStrength.from_string(eval_data.get("recommendation", "acceptable")),
                 notes=eval_data.get("notes", ""),
             )
             

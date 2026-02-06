@@ -1,0 +1,150 @@
+{"domain": "data_engineering", "question": "How do you scale data warehouses from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "How would you secure partitioning? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "Design a system leveraging ETL. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "What are the first principles you apply when approaching problems in data engineering?"}
+{"domain": "data_engineering", "question": "How do you scale ETL from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "How do you scale data quality from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "What anti-patterns do you see often in data engineering and how do you avoid them?"}
+{"domain": "data_engineering", "question": "How would you reduce cost for a system built around orchestration without harming reliability?"}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to ELT? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "How would you reduce cost for a system built around file formats without harming reliability?"}
+{"domain": "data_engineering", "question": "How would you test late data at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe ETL? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "How would you reduce cost for a system built around partitioning without harming reliability?"}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for lakehouse? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "How do you scale partitioning from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "How would you reduce cost for a system built around ETL without harming reliability?"}
+{"domain": "data_engineering", "question": "How would you test CDC at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to lakehouse? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "What are the performance bottlenecks in late data and how would you mitigate them?"}
+{"domain": "data_engineering", "question": "Compare two approaches for lakehouse. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for ELT, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe orchestration? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "How would you reduce cost for a system built around data modeling without harming reliability?"}
+{"domain": "data_engineering", "question": "Give a real-world example where data warehouses matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe data modeling? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for orchestration, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe partitioning? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for ETL? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "How would you secure file formats? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "How would you secure orchestration? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for CDC? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "How do you scale ELT from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe data quality? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for partitioning, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "Give a real-world example where late data matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "Design a system leveraging late data. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for data warehouses? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing lakehouse?"}
+{"domain": "data_engineering", "question": "Give a real-world example where CDC matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "How would you reduce cost for a system built around lakehouse without harming reliability?"}
+{"domain": "data_engineering", "question": "How do you scale file formats from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "Give a real-world example where ETL matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "Compare two approaches for file formats. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to late data? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing data quality?"}
+{"domain": "data_engineering", "question": "How would you reduce cost for a system built around late data without harming reliability?"}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to file formats. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe lakehouse? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "How do you prioritize time/cost/quality trade-offs in data engineering? Give an example."}
+{"domain": "data_engineering", "question": "What are the performance bottlenecks in CDC and how would you mitigate them?"}
+{"domain": "data_engineering", "question": "Design a system leveraging partitioning. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe late data? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing orchestration?"}
+{"domain": "data_engineering", "question": "Explain orchestration in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "What are the performance bottlenecks in data warehouses and how would you mitigate them?"}
+{"domain": "data_engineering", "question": "Compare two approaches for data quality. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "What are the performance bottlenecks in lakehouse and how would you mitigate them?"}
+{"domain": "data_engineering", "question": "How would you test data warehouses at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "Compare two approaches for partitioning. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for CDC, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to batch vs stream. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "What are the performance bottlenecks in ETL and how would you mitigate them?"}
+{"domain": "data_engineering", "question": "Design a system leveraging lakehouse. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "Give a real-world example where batch vs stream matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "What are the performance bottlenecks in ELT and how would you mitigate them?"}
+{"domain": "data_engineering", "question": "Design a system leveraging orchestration. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "Compare two approaches for CDC. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "Design a system leveraging CDC. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "Give a real-world example where lakehouse matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "How would you secure data modeling? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "What are the performance bottlenecks in orchestration and how would you mitigate them?"}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to data quality. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "How would you test data quality at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "Explain ETL in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "How would you test partitioning at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe ELT? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing data modeling?"}
+{"domain": "data_engineering", "question": "Explain late data in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing late data?"}
+{"domain": "data_engineering", "question": "Compare two approaches for data modeling. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe file formats? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for file formats, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "Compare two approaches for batch vs stream. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "How would you reduce cost for a system built around batch vs stream without harming reliability?"}
+{"domain": "data_engineering", "question": "How would you secure data warehouses? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to CDC? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "How would you secure batch vs stream? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to data modeling. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to late data. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for data modeling? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "How would you secure data quality? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for data quality, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing file formats?"}
+{"domain": "data_engineering", "question": "Explain batch vs stream in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "How would you secure late data? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to lakehouse. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "Explain data modeling in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "Explain lakehouse in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "Design a system leveraging file formats. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to partitioning? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing partitioning?"}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to file formats? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to data modeling? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for ETL, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for ELT? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "Explain data quality in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "How would you test data modeling at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing data warehouses?"}
+{"domain": "data_engineering", "question": "Design a system leveraging data warehouses. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe CDC? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for orchestration? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "How would you secure CDC? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to ETL. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "Give a real-world example where data modeling matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for batch vs stream? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "How would you test ELT at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for late data, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to data warehouses. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "Design a system leveraging ELT. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "How do you scale lakehouse from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "Give a real-world example where file formats matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "What telemetry would you add to observe batch vs stream? (metrics, logs, traces)"}
+{"domain": "data_engineering", "question": "Compare two approaches for ETL. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "What are the performance bottlenecks in batch vs stream and how would you mitigate them?"}
+{"domain": "data_engineering", "question": "Design a system leveraging batch vs stream. Describe APIs, data models, and scaling considerations."}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to orchestration? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "How do you scale CDC from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "What would your rollout strategy be for a major change to ETL? (blue/green, canary, feature flags)"}
+{"domain": "data_engineering", "question": "How would you secure ETL? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing CDC?"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for data modeling, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "How would you mentor a junior on data engineering for their first 30-60-90 days?"}
+{"domain": "data_engineering", "question": "Give a real-world example where ELT matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "Compare two approaches for late data. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "Explain partitioning in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "Compare two approaches for data warehouses. When would you choose one over the other?"}
+{"domain": "data_engineering", "question": "Walk through a minimal baseline for data warehouses, then evolve it to a production-grade solution."}
+{"domain": "data_engineering", "question": "Give a real-world example where orchestration matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "Which metrics/SLIs best capture success for file formats? How do you alert without causing noise?"}
+{"domain": "data_engineering", "question": "How do you scale orchestration from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "Explain data warehouses in the context of data engineering. Include pitfalls and best practices."}
+{"domain": "data_engineering", "question": "What trade-offs would you call out to a non-technical PM when proposing batch vs stream?"}
+{"domain": "data_engineering", "question": "How would you test orchestration at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to ELT. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "How would you test ETL at unit, integration, and e2e levels?"}
+{"domain": "data_engineering", "question": "Give a real-world example where partitioning matters. Outline the end-to-end architecture."}
+{"domain": "data_engineering", "question": "How would you secure lakehouse? Consider authN/Z, data protection, and least privilege."}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to CDC. What logs, metrics, and traces would you check?"}
+{"domain": "data_engineering", "question": "How do you scale batch vs stream from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "data_engineering", "question": "Troubleshoot a failure scenario related to partitioning. What logs, metrics, and traces would you check?"}

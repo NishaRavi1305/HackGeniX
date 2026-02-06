@@ -1,0 +1,150 @@
+{"domain": "software_engineer", "question": "Give a real-world example where testing matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to concurrency. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for design patterns, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "Give a real-world example where concurrency matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for networking? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for algorithms? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "How would you test memory management at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "How do you scale OOP from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "How do you prioritize time/cost/quality trade-offs in software engineer? Give an example."}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for memory management, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe data structures? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in memory management and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to concurrency? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for networking, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "How would you secure performance tuning? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for OOP? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in algorithms and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "How would you test networking at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "How do you scale concurrency from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "Explain databases in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "How do you scale testing from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "How would you test performance tuning at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in testing and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "Describe a blameless postmortem template tailored to incidents in software engineer."}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to databases? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "Design a system leveraging databases. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "Compare two approaches for design patterns. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to testing? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "Explain algorithms in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around performance tuning without harming reliability?"}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe performance tuning? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing OOP?"}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for data structures? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "Compare two approaches for testing. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to networking. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to data structures. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "Compare two approaches for memory management. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around algorithms without harming reliability?"}
+{"domain": "software_engineer", "question": "Design a system leveraging algorithms. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "How would you test OOP at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "Compare two approaches for concurrency. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "Give a real-world example where databases matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to design patterns. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "How would you secure algorithms? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in performance tuning and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "Design a system leveraging data structures. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "Compare two approaches for data structures. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "Design a system leveraging testing. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around databases without harming reliability?"}
+{"domain": "software_engineer", "question": "Design a system leveraging memory management. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "Design a system leveraging networking. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for concurrency, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "How do you scale design patterns from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "Give a real-world example where design patterns matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "How do you scale databases from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe algorithms? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in networking and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe testing? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to memory management. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "How do you scale data structures from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to algorithms? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe networking? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to memory management? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for performance tuning? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "How would you test testing at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for OOP, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing performance tuning?"}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing design patterns?"}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing concurrency?"}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing data structures?"}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to databases. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to performance tuning? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "What are the first principles you apply when approaching problems in software engineer?"}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for data structures, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "How would you secure design patterns? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe OOP? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for performance tuning, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "Explain testing in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for algorithms, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "Design a system leveraging OOP. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "Compare two approaches for OOP. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for testing, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "Design a system leveraging design patterns. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "Compare two approaches for performance tuning. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "Give a real-world example where memory management matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing networking?"}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around memory management without harming reliability?"}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around OOP without harming reliability?"}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around design patterns without harming reliability?"}
+{"domain": "software_engineer", "question": "How would you secure OOP? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "How would you test concurrency at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "Compare two approaches for algorithms. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "How would you secure databases? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "How would you mentor a junior on software engineer for their first 30-60-90 days?"}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in concurrency and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "How would you secure data structures? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around testing without harming reliability?"}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for concurrency? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "Explain data structures in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing testing?"}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to data structures? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for memory management? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe concurrency? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing memory management?"}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in databases and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe databases? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing algorithms?"}
+{"domain": "software_engineer", "question": "How would you test data structures at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to testing. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "Explain OOP in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe memory management? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for databases? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "Give a real-world example where algorithms matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "How do you scale performance tuning from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "How do you scale algorithms from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "Give a real-world example where OOP matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to performance tuning. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "Design a system leveraging performance tuning. Describe APIs, data models, and scaling considerations."}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in OOP and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "How would you test design patterns at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "Explain design patterns in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "How would you secure testing? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "Give a real-world example where data structures matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "How would you secure networking? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "How do you scale memory management from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "Explain memory management in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "Compare two approaches for networking. When would you choose one over the other?"}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around concurrency without harming reliability?"}
+{"domain": "software_engineer", "question": "Explain networking in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "What trade-offs would you call out to a non-technical PM when proposing databases?"}
+{"domain": "software_engineer", "question": "Walk through a minimal baseline for databases, then evolve it to a production-grade solution."}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to OOP. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to design patterns? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "Give a real-world example where networking matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "How do you scale networking from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "software_engineer", "question": "Give a real-world example where performance tuning matters. Outline the end-to-end architecture."}
+{"domain": "software_engineer", "question": "How would you secure memory management? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around networking without harming reliability?"}
+{"domain": "software_engineer", "question": "How would you reduce cost for a system built around data structures without harming reliability?"}
+{"domain": "software_engineer", "question": "How would you test algorithms at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "Troubleshoot a failure scenario related to algorithms. What logs, metrics, and traces would you check?"}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for testing? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "What would your rollout strategy be for a major change to networking? (blue/green, canary, feature flags)"}
+{"domain": "software_engineer", "question": "How would you test databases at unit, integration, and e2e levels?"}
+{"domain": "software_engineer", "question": "What are the performance bottlenecks in design patterns and how would you mitigate them?"}
+{"domain": "software_engineer", "question": "Which metrics/SLIs best capture success for design patterns? How do you alert without causing noise?"}
+{"domain": "software_engineer", "question": "Explain concurrency in the context of software engineer. Include pitfalls and best practices."}
+{"domain": "software_engineer", "question": "What telemetry would you add to observe design patterns? (metrics, logs, traces)"}
+{"domain": "software_engineer", "question": "How would you secure concurrency? Consider authN/Z, data protection, and least privilege."}
+{"domain": "software_engineer", "question": "Compare two approaches for databases. When would you choose one over the other?"}

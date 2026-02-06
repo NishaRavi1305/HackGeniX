@@ -1,0 +1,150 @@
+{"domain": "web_dev", "question": "What telemetry would you add to observe accessibility? (metrics, logs, traces)"}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing React?"}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to HTML/CSS? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in security and how would you mitigate them?"}
+{"domain": "web_dev", "question": "How would you secure React? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "Give a real-world example where HTTP/3 matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing HTML/CSS?"}
+{"domain": "web_dev", "question": "Explain bundling and tree-shaking in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for web performance? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "How would you mentor a junior on web dev for their first 30-60-90 days?"}
+{"domain": "web_dev", "question": "Explain HTTP/3 in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for CSR vs SSR vs ISR? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to security? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "Explain web performance in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for security, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for web performance, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing CSR vs SSR vs ISR?"}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for HTTP/3? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "How would you test CSR vs SSR vs ISR at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to React? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing JavaScript runtime?"}
+{"domain": "web_dev", "question": "How would you secure CSR vs SSR vs ISR? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "How would you secure HTTP/3? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to bundling and tree-shaking. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "How would you test JavaScript runtime at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "What telemetry would you add to observe HTML/CSS? (metrics, logs, traces)"}
+{"domain": "web_dev", "question": "Explain accessibility in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "How would you secure accessibility? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing Next.js?"}
+{"domain": "web_dev", "question": "How would you test HTTP/3 at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in HTTP/3 and how would you mitigate them?"}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to HTTP/3? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "Compare two approaches for React. When would you choose one over the other?"}
+{"domain": "web_dev", "question": "Give a real-world example where CSR vs SSR vs ISR matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "How do you scale Next.js from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to accessibility. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around HTTP/2 without harming reliability?"}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in CSR vs SSR vs ISR and how would you mitigate them?"}
+{"domain": "web_dev", "question": "How would you test React at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to accessibility? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "How would you secure HTML/CSS? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around CSR vs SSR vs ISR without harming reliability?"}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in JavaScript runtime and how would you mitigate them?"}
+{"domain": "web_dev", "question": "Explain React in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "What telemetry would you add to observe HTTP/3? (metrics, logs, traces)"}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for accessibility? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "What are the first principles you apply when approaching problems in web dev?"}
+{"domain": "web_dev", "question": "How do you scale HTTP/3 from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "Design a system leveraging Next.js. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to JavaScript runtime? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "Design a system leveraging HTTP/3. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "How would you secure JavaScript runtime? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "Give a real-world example where React matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "How do you prioritize time/cost/quality trade-offs in web dev? Give an example."}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around Next.js without harming reliability?"}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for HTTP/2? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "How would you test accessibility at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for bundling and tree-shaking, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "Compare two approaches for accessibility. When would you choose one over the other?"}
+{"domain": "web_dev", "question": "Compare two approaches for security. When would you choose one over the other?"}
+{"domain": "web_dev", "question": "Design a system leveraging security. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in web performance and how would you mitigate them?"}
+{"domain": "web_dev", "question": "How would you secure bundling and tree-shaking? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "Explain HTML/CSS in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "How would you test web performance at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "How do you scale CSR vs SSR vs ISR from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "How would you test Next.js at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to Next.js? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to web performance? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "Compare two approaches for CSR vs SSR vs ISR. When would you choose one over the other?"}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing accessibility?"}
+{"domain": "web_dev", "question": "Compare two approaches for HTTP/2. When would you choose one over the other?"}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to HTTP/3. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "Design a system leveraging accessibility. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "How would you test HTML/CSS at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to security. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to CSR vs SSR vs ISR. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "Explain HTTP/2 in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to React. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for React? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing security?"}
+{"domain": "web_dev", "question": "How would you test HTTP/2 at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around security without harming reliability?"}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around HTML/CSS without harming reliability?"}
+{"domain": "web_dev", "question": "Give a real-world example where HTML/CSS matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "Explain CSR vs SSR vs ISR in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "Compare two approaches for web performance. When would you choose one over the other?"}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for JavaScript runtime? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "Describe a blameless postmortem template tailored to incidents in web dev."}
+{"domain": "web_dev", "question": "Give a real-world example where bundling and tree-shaking matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for HTML/CSS, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "Give a real-world example where security matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "What telemetry would you add to observe Next.js? (metrics, logs, traces)"}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around JavaScript runtime without harming reliability?"}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing bundling and tree-shaking?"}
+{"domain": "web_dev", "question": "Design a system leveraging HTTP/2. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "Design a system leveraging HTML/CSS. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "Give a real-world example where JavaScript runtime matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in React and how would you mitigate them?"}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for accessibility, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "How do you scale security from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in Next.js and how would you mitigate them?"}
+{"domain": "web_dev", "question": "Give a real-world example where HTTP/2 matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for React, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "How do you scale accessibility from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "How do you scale React from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "Explain JavaScript runtime in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in HTTP/2 and how would you mitigate them?"}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around bundling and tree-shaking without harming reliability?"}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in bundling and tree-shaking and how would you mitigate them?"}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around HTTP/3 without harming reliability?"}
+{"domain": "web_dev", "question": "Compare two approaches for JavaScript runtime. When would you choose one over the other?"}
+{"domain": "web_dev", "question": "What telemetry would you add to observe web performance? (metrics, logs, traces)"}
+{"domain": "web_dev", "question": "Design a system leveraging bundling and tree-shaking. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to HTTP/2. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "How would you secure web performance? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "Compare two approaches for HTTP/3. When would you choose one over the other?"}
+{"domain": "web_dev", "question": "How would you secure security? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "What telemetry would you add to observe HTTP/2? (metrics, logs, traces)"}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for HTML/CSS? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around web performance without harming reliability?"}
+{"domain": "web_dev", "question": "How would you reduce cost for a system built around React without harming reliability?"}
+{"domain": "web_dev", "question": "How would you secure Next.js? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for HTTP/3, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing web performance?"}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for CSR vs SSR vs ISR, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "How would you secure HTTP/2? Consider authN/Z, data protection, and least privilege."}
+{"domain": "web_dev", "question": "Design a system leveraging web performance. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to HTTP/2? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "Give a real-world example where web performance matters. Outline the end-to-end architecture."}
+{"domain": "web_dev", "question": "How do you scale JavaScript runtime from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for JavaScript runtime, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "Design a system leveraging React. Describe APIs, data models, and scaling considerations."}
+{"domain": "web_dev", "question": "Explain Next.js in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "What would your rollout strategy be for a major change to CSR vs SSR vs ISR? (blue/green, canary, feature flags)"}
+{"domain": "web_dev", "question": "How would you test bundling and tree-shaking at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for security? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "What are the performance bottlenecks in accessibility and how would you mitigate them?"}
+{"domain": "web_dev", "question": "Walk through a minimal baseline for HTTP/2, then evolve it to a production-grade solution."}
+{"domain": "web_dev", "question": "Which metrics/SLIs best capture success for Next.js? How do you alert without causing noise?"}
+{"domain": "web_dev", "question": "How do you scale HTTP/2 from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "How do you scale bundling and tree-shaking from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "web_dev", "question": "How would you test security at unit, integration, and e2e levels?"}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to Next.js. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing HTTP/2?"}
+{"domain": "web_dev", "question": "What telemetry would you add to observe React? (metrics, logs, traces)"}
+{"domain": "web_dev", "question": "Troubleshoot a failure scenario related to web performance. What logs, metrics, and traces would you check?"}
+{"domain": "web_dev", "question": "Explain security in the context of web dev. Include pitfalls and best practices."}
+{"domain": "web_dev", "question": "What trade-offs would you call out to a non-technical PM when proposing HTTP/3?"}
+{"domain": "web_dev", "question": "Design a system leveraging JavaScript runtime. Describe APIs, data models, and scaling considerations."}

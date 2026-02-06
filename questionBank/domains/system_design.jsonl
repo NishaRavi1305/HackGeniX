@@ -1,0 +1,150 @@
+{"domain": "system_design", "question": "How do you scale availability from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to realtime systems. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "Explain consistency in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "What telemetry would you add to observe availability? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "How would you secure pub-sub? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "How do you scale consistency from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for realtime systems? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "Compare two approaches for storage. When would you choose one over the other?"}
+{"domain": "system_design", "question": "Give a real-world example where realtime systems matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "How would you test storage at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "Give a real-world example where pub-sub matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing sharding?"}
+{"domain": "system_design", "question": "Design a system leveraging availability. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "What are the performance bottlenecks in storage and how would you mitigate them?"}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to pub-sub. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around caching without harming reliability?"}
+{"domain": "system_design", "question": "How would you secure sharding? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for load balancing? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "How would you secure availability? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing CAP?"}
+{"domain": "system_design", "question": "How would you test load balancing at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for search? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "What telemetry would you add to observe CAP? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for sharding? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for scalability? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "Design a system leveraging consistency. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "Give a real-world example where scalability matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to search? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "What are the performance bottlenecks in rate limiting and how would you mitigate them?"}
+{"domain": "system_design", "question": "Walk through a minimal baseline for consistency, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "Design a system leveraging load balancing. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "How would you test CAP at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "How do you scale search from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "How do you scale storage from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "What telemetry would you add to observe consistency? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "How do you scale realtime systems from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "Give a real-world example where consistency matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "What anti-patterns do you see often in system design and how do you avoid them?"}
+{"domain": "system_design", "question": "How do you scale sharding from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "Compare two approaches for realtime systems. When would you choose one over the other?"}
+{"domain": "system_design", "question": "What are the first principles you apply when approaching problems in system design?"}
+{"domain": "system_design", "question": "How do you scale load balancing from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "What are the performance bottlenecks in pub-sub and how would you mitigate them?"}
+{"domain": "system_design", "question": "Design a system leveraging rate limiting. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "Give a real-world example where search matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "What telemetry would you add to observe rate limiting? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "Design a system leveraging scalability. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing scalability?"}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for caching? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to load balancing. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "What telemetry would you add to observe storage? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "Walk through a minimal baseline for availability, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "How would you secure consistency? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "Explain sharding in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "What telemetry would you add to observe caching? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "How do you scale rate limiting from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to availability? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "Explain pub-sub in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "Design a system leveraging sharding. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around consistency without harming reliability?"}
+{"domain": "system_design", "question": "How would you test search at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to scalability? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "Walk through a minimal baseline for pub-sub, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "How would you secure rate limiting? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "Walk through a minimal baseline for search, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "Describe a blameless postmortem template tailored to incidents in system design."}
+{"domain": "system_design", "question": "How would you test consistency at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "Compare two approaches for load balancing. When would you choose one over the other?"}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around availability without harming reliability?"}
+{"domain": "system_design", "question": "Explain caching in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to load balancing? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to storage. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing caching?"}
+{"domain": "system_design", "question": "How would you test realtime systems at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to consistency. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing consistency?"}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around pub-sub without harming reliability?"}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to caching? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to availability. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "What are the performance bottlenecks in search and how would you mitigate them?"}
+{"domain": "system_design", "question": "Walk through a minimal baseline for scalability, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "Compare two approaches for caching. When would you choose one over the other?"}
+{"domain": "system_design", "question": "Give a real-world example where rate limiting matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "Walk through a minimal baseline for realtime systems, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "Give a real-world example where caching matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to realtime systems? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for consistency? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "How would you test rate limiting at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to CAP. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "How would you secure scalability? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "What telemetry would you add to observe scalability? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "How would you test availability at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "Compare two approaches for search. When would you choose one over the other?"}
+{"domain": "system_design", "question": "Design a system leveraging CAP. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "Design a system leveraging storage. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "How do you scale CAP from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "What are the performance bottlenecks in sharding and how would you mitigate them?"}
+{"domain": "system_design", "question": "How do you scale pub-sub from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "Explain availability in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around sharding without harming reliability?"}
+{"domain": "system_design", "question": "Give a real-world example where storage matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "What are the performance bottlenecks in availability and how would you mitigate them?"}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to CAP? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "Design a system leveraging pub-sub. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for rate limiting? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "What telemetry would you add to observe search? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "What telemetry would you add to observe pub-sub? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to sharding? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around scalability without harming reliability?"}
+{"domain": "system_design", "question": "Walk through a minimal baseline for sharding, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "How would you secure search? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around rate limiting without harming reliability?"}
+{"domain": "system_design", "question": "Walk through a minimal baseline for load balancing, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to sharding. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "Explain realtime systems in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "How do you scale scalability from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "system_design", "question": "Walk through a minimal baseline for storage, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "Explain CAP in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "Explain load balancing in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "Troubleshoot a failure scenario related to rate limiting. What logs, metrics, and traces would you check?"}
+{"domain": "system_design", "question": "Compare two approaches for availability. When would you choose one over the other?"}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to storage? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing availability?"}
+{"domain": "system_design", "question": "What are the performance bottlenecks in scalability and how would you mitigate them?"}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for pub-sub? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "Compare two approaches for sharding. When would you choose one over the other?"}
+{"domain": "system_design", "question": "How would you secure realtime systems? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "Design a system leveraging realtime systems. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "How would you test pub-sub at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "How would you test sharding at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing pub-sub?"}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for storage? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "Compare two approaches for pub-sub. When would you choose one over the other?"}
+{"domain": "system_design", "question": "What telemetry would you add to observe realtime systems? (metrics, logs, traces)"}
+{"domain": "system_design", "question": "Give a real-world example where load balancing matters. Outline the end-to-end architecture."}
+{"domain": "system_design", "question": "Compare two approaches for scalability. When would you choose one over the other?"}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing search?"}
+{"domain": "system_design", "question": "What are the performance bottlenecks in load balancing and how would you mitigate them?"}
+{"domain": "system_design", "question": "What trade-offs would you call out to a non-technical PM when proposing realtime systems?"}
+{"domain": "system_design", "question": "Walk through a minimal baseline for rate limiting, then evolve it to a production-grade solution."}
+{"domain": "system_design", "question": "Which metrics/SLIs best capture success for availability? How do you alert without causing noise?"}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around CAP without harming reliability?"}
+{"domain": "system_design", "question": "What are the performance bottlenecks in caching and how would you mitigate them?"}
+{"domain": "system_design", "question": "How would you test caching at unit, integration, and e2e levels?"}
+{"domain": "system_design", "question": "Design a system leveraging search. Describe APIs, data models, and scaling considerations."}
+{"domain": "system_design", "question": "How would you reduce cost for a system built around storage without harming reliability?"}
+{"domain": "system_design", "question": "How would you secure load balancing? Consider authN/Z, data protection, and least privilege."}
+{"domain": "system_design", "question": "Explain scalability in the context of system design. Include pitfalls and best practices."}
+{"domain": "system_design", "question": "What would your rollout strategy be for a major change to rate limiting? (blue/green, canary, feature flags)"}
+{"domain": "system_design", "question": "What are the performance bottlenecks in realtime systems and how would you mitigate them?"}

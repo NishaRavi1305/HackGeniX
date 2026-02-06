@@ -452,6 +452,416 @@ class DocumentProcessor:
         bullet_pattern = r'(?:^|\n)\s*(?:•|[-–]|\d+[.)]\s*)\s*(.+?)(?=\n|$)'
         matches = re.findall(bullet_pattern, text)
         return [m.strip() for m in matches if m.strip()]
+    
+    # =========================================================================
+    # LLM-Based Parsing Methods
+    # =========================================================================
+    
+    async def parse_resume_with_llm(
+        self,
+        file_bytes: bytes,
+        content_type: str,
+        use_cache: bool = True,
+    ) -> ParsedResume:
+        """
+        Parse a resume using LLM for robust extraction.
+        
+        This method uses an LLM to extract structured information from resume text,
+        handling diverse formats and layouts that rule-based parsing may miss.
+        
+        Args:
+            file_bytes: File content as bytes
+            content_type: MIME type of the file
+            use_cache: Whether to use cached results if available
+            
+        Returns:
+            ParsedResume with extracted information
+        """
+        import hashlib
+        import json
+        
+        # Generate cache key from file hash
+        file_hash = hashlib.sha256(file_bytes).hexdigest()[:16]
+        cache_key = f"resume_{file_hash}"
+        
+        # Check cache
+        if use_cache:
+            cached = self._get_from_cache(cache_key)
+            if cached:
+                logger.info(f"Using cached resume parse: {cache_key}")
+                return cached
+        
+        # Extract raw text first
+        text = await self.extract_text(file_bytes, content_type)
+        
+        if not text or len(text.strip()) < 50:
+            logger.warning("Resume text too short, returning empty parse")
+            return ParsedResume(raw_text=text)
+        
+        try:
+            from src.providers.llm import get_llm_provider
+            from src.providers.llm.base import GenerationConfig, user_message, system_message
+            from src.services.prompts import RESUME_EXTRACTION_PROMPT
+            
+            llm = await get_llm_provider()
+            
+            # Truncate text if too long (keep first 8000 chars for context window)
+            resume_text = text[:8000] if len(text) > 8000 else text
+            
+            prompt = RESUME_EXTRACTION_PROMPT.format(resume_text=resume_text)
+            
+            messages = [
+                system_message("You are an expert resume parser. Extract information accurately and completely."),
+                user_message(prompt),
+            ]
+            
+            logger.info("Parsing resume with LLM...")
+            response = await llm.generate(
+                messages,
+                GenerationConfig(max_tokens=2048, temperature=0.1)
+            )
+            
+            # Parse JSON response
+            data = self._parse_llm_json_response(response.content)
+            
+            if not data:
+                logger.warning("LLM returned invalid JSON, falling back to rule-based parsing")
+                return await self.parse_resume(file_bytes, content_type)
+            
+            # Convert to ParsedResume
+            parsed = self._json_to_parsed_resume(data, text)
+            
+            # Cache the result
+            if use_cache:
+                self._save_to_cache(cache_key, parsed)
+            
+            logger.info(f"LLM resume parse complete: {parsed.contact.name if parsed.contact else 'Unknown'}")
+            return parsed
+            
+        except Exception as e:
+            logger.warning(f"LLM resume parsing failed: {e}, falling back to rule-based")
+            return await self.parse_resume(file_bytes, content_type)
+    
+    async def parse_job_description_with_llm(
+        self,
+        text: str,
+        use_cache: bool = True,
+    ) -> ParsedJobDescription:
+        """
+        Parse a job description using LLM for robust extraction.
+        
+        Args:
+            text: Job description text
+            use_cache: Whether to use cached results if available
+            
+        Returns:
+            ParsedJobDescription with extracted information
+        """
+        import hashlib
+        import json
+        
+        # Generate cache key from text hash
+        text_hash = hashlib.sha256(text.encode()).hexdigest()[:16]
+        cache_key = f"jd_{text_hash}"
+        
+        # Check cache
+        if use_cache:
+            cached = self._get_from_cache(cache_key)
+            if cached:
+                logger.info(f"Using cached JD parse: {cache_key}")
+                return cached
+        
+        if not text or len(text.strip()) < 50:
+            logger.warning("JD text too short, returning empty parse")
+            return ParsedJobDescription(raw_text=text)
+        
+        try:
+            from src.providers.llm import get_llm_provider
+            from src.providers.llm.base import GenerationConfig, user_message, system_message
+            from src.services.prompts import JD_EXTRACTION_PROMPT
+            
+            llm = await get_llm_provider()
+            
+            # Truncate if too long
+            jd_text = text[:8000] if len(text) > 8000 else text
+            
+            prompt = JD_EXTRACTION_PROMPT.format(jd_text=jd_text)
+            
+            messages = [
+                system_message("You are an expert job description parser. Extract requirements accurately."),
+                user_message(prompt),
+            ]
+            
+            logger.info("Parsing job description with LLM...")
+            response = await llm.generate(
+                messages,
+                GenerationConfig(max_tokens=2048, temperature=0.1)
+            )
+            
+            # Parse JSON response
+            data = self._parse_llm_json_response(response.content)
+            
+            if not data:
+                logger.warning("LLM returned invalid JSON, falling back to rule-based parsing")
+                return await self.parse_job_description(text)
+            
+            # Convert to ParsedJobDescription
+            parsed = self._json_to_parsed_jd(data, text)
+            
+            # Cache the result
+            if use_cache:
+                self._save_to_cache(cache_key, parsed)
+            
+            logger.info(f"LLM JD parse complete: {parsed.title or 'Unknown'}")
+            return parsed
+            
+        except Exception as e:
+            logger.warning(f"LLM JD parsing failed: {e}, falling back to rule-based")
+            return await self.parse_job_description(text)
+    
+    def _parse_llm_json_response(self, content: str) -> Optional[Dict[str, Any]]:
+        """Parse JSON from LLM response, handling common formatting issues."""
+        import json
+        
+        content = content.strip()
+        
+        # Handle markdown code blocks
+        if "```json" in content:
+            start = content.find("```json") + 7
+            end = content.find("```", start)
+            content = content[start:end].strip()
+        elif "```" in content:
+            start = content.find("```") + 3
+            end = content.find("```", start)
+            content = content[start:end].strip()
+        
+        # Find JSON object bounds
+        if not content.startswith("{"):
+            start = content.find("{")
+            if start != -1:
+                content = content[start:]
+        
+        if not content.endswith("}"):
+            end = content.rfind("}")
+            if end != -1:
+                content = content[:end + 1]
+        
+        try:
+            return json.loads(content)
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to parse LLM JSON: {e}")
+            logger.debug(f"Content was: {content[:500]}")
+            return None
+    
+    def _json_to_parsed_resume(self, data: Dict[str, Any], raw_text: str) -> ParsedResume:
+        """Convert LLM JSON output to ParsedResume model."""
+        # Extract contact info
+        contact_data = data.get("contact", {})
+        contact = ContactInfo(
+            name=contact_data.get("full_name"),
+            email=contact_data.get("email"),
+            phone=contact_data.get("phone"),
+            linkedin=contact_data.get("linkedin"),
+            github=contact_data.get("github"),
+            location=contact_data.get("location"),
+        )
+        
+        # Extract experience
+        experience = []
+        for exp_data in data.get("experience", []):
+            if isinstance(exp_data, dict):
+                experience.append(Experience(
+                    company=exp_data.get("company"),
+                    title=exp_data.get("title"),
+                    location=exp_data.get("location"),
+                    start_date=exp_data.get("start_date"),
+                    end_date=exp_data.get("end_date"),
+                    description=exp_data.get("description"),
+                    highlights=exp_data.get("highlights", []),
+                ))
+        
+        # Extract education
+        education = []
+        for edu_data in data.get("education", []):
+            if isinstance(edu_data, dict):
+                education.append(Education(
+                    institution=edu_data.get("institution"),
+                    degree=edu_data.get("degree"),
+                    field=edu_data.get("field"),
+                    start_date=edu_data.get("start_date"),
+                    end_date=edu_data.get("end_date"),
+                    gpa=edu_data.get("gpa"),
+                ))
+        
+        # Extract skills
+        skills = data.get("skills", [])
+        if isinstance(skills, list):
+            skills = [s for s in skills if isinstance(s, str)]
+        else:
+            skills = []
+        
+        # Extract certifications
+        certifications = data.get("certifications", [])
+        if not isinstance(certifications, list):
+            certifications = []
+        
+        return ParsedResume(
+            contact=contact,
+            summary=data.get("summary"),
+            skills=skills,
+            experience=experience,
+            education=education,
+            certifications=certifications,
+            raw_text=raw_text,
+        )
+    
+    def _json_to_parsed_jd(self, data: Dict[str, Any], raw_text: str) -> ParsedJobDescription:
+        """Convert LLM JSON output to ParsedJobDescription model."""
+        return ParsedJobDescription(
+            title=data.get("title"),
+            company=data.get("company"),
+            location=data.get("location"),
+            employment_type=data.get("employment_type"),
+            experience_level=data.get("experience_level"),
+            experience_years_min=data.get("experience_years_min"),
+            experience_years_max=data.get("experience_years_max"),
+            salary_min=data.get("salary_min"),
+            salary_max=data.get("salary_max"),
+            salary_currency=data.get("salary_currency"),
+            required_skills=data.get("required_skills", []),
+            preferred_skills=data.get("preferred_skills", []),
+            responsibilities=data.get("responsibilities", []),
+            qualifications=data.get("qualifications", []),
+            raw_text=raw_text,
+        )
+    
+    # =========================================================================
+    # Caching Methods
+    # =========================================================================
+    
+    _cache_dir: Optional[Path] = None
+    
+    @classmethod
+    def _get_cache_dir(cls) -> Path:
+        """Get or create the cache directory."""
+        if cls._cache_dir is None:
+            cache_path = Path(__file__).parent.parent.parent / ".cache" / "parsed_documents"
+            cache_path.mkdir(parents=True, exist_ok=True)
+            cls._cache_dir = cache_path
+        return cls._cache_dir
+    
+    def _get_from_cache(self, cache_key: str) -> Optional[Any]:
+        """Get a cached parsed document."""
+        import json
+        
+        cache_file = self._get_cache_dir() / f"{cache_key}.json"
+        
+        if not cache_file.exists():
+            return None
+        
+        try:
+            with open(cache_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            # Reconstruct the appropriate model
+            if cache_key.startswith("resume_"):
+                return self._json_to_parsed_resume(data, data.get("_raw_text", ""))
+            elif cache_key.startswith("jd_"):
+                return self._json_to_parsed_jd(data, data.get("_raw_text", ""))
+            
+            return None
+            
+        except Exception as e:
+            logger.warning(f"Failed to load from cache: {e}")
+            return None
+    
+    def _save_to_cache(self, cache_key: str, parsed: Any) -> None:
+        """Save a parsed document to cache."""
+        import json
+        
+        cache_file = self._get_cache_dir() / f"{cache_key}.json"
+        
+        try:
+            # Convert model to dict for caching
+            if isinstance(parsed, ParsedResume):
+                data = {
+                    "contact": {
+                        "full_name": parsed.contact.name if parsed.contact else None,
+                        "email": parsed.contact.email if parsed.contact else None,
+                        "phone": parsed.contact.phone if parsed.contact else None,
+                        "linkedin": parsed.contact.linkedin if parsed.contact else None,
+                        "github": parsed.contact.github if parsed.contact else None,
+                        "location": parsed.contact.location if parsed.contact else None,
+                    },
+                    "summary": parsed.summary,
+                    "skills": parsed.skills,
+                    "experience": [
+                        {
+                            "company": exp.company,
+                            "title": exp.title,
+                            "location": exp.location,
+                            "start_date": exp.start_date,
+                            "end_date": exp.end_date,
+                            "description": exp.description,
+                            "highlights": exp.highlights,
+                        }
+                        for exp in parsed.experience
+                    ],
+                    "education": [
+                        {
+                            "institution": edu.institution,
+                            "degree": edu.degree,
+                            "field": edu.field,
+                            "start_date": edu.start_date,
+                            "end_date": edu.end_date,
+                            "gpa": edu.gpa,
+                        }
+                        for edu in parsed.education
+                    ],
+                    "certifications": parsed.certifications,
+                    "_raw_text": parsed.raw_text,
+                }
+            elif isinstance(parsed, ParsedJobDescription):
+                data = {
+                    "title": parsed.title,
+                    "company": parsed.company,
+                    "location": parsed.location,
+                    "employment_type": parsed.employment_type,
+                    "experience_level": parsed.experience_level,
+                    "experience_years_min": parsed.experience_years_min,
+                    "experience_years_max": parsed.experience_years_max,
+                    "salary_min": parsed.salary_min,
+                    "salary_max": parsed.salary_max,
+                    "salary_currency": parsed.salary_currency,
+                    "required_skills": parsed.required_skills,
+                    "preferred_skills": parsed.preferred_skills,
+                    "responsibilities": parsed.responsibilities,
+                    "qualifications": parsed.qualifications,
+                    "_raw_text": parsed.raw_text,
+                }
+            else:
+                return
+            
+            with open(cache_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            
+            logger.debug(f"Saved to cache: {cache_key}")
+            
+        except Exception as e:
+            logger.warning(f"Failed to save to cache: {e}")
+    
+    def clear_cache(self) -> int:
+        """Clear all cached parsed documents. Returns number of files deleted."""
+        cache_dir = self._get_cache_dir()
+        count = 0
+        for cache_file in cache_dir.glob("*.json"):
+            try:
+                cache_file.unlink()
+                count += 1
+            except Exception:
+                pass
+        logger.info(f"Cleared {count} cached documents")
+        return count
 
 
 # Global processor instance (lazy loaded)

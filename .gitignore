@@ -85,3 +85,9 @@ Thumbs.db
 *.pem
 *.key
 credentials.json
+
+# Personal test files
+tests_personal/
+
+# Cache
+.cache/

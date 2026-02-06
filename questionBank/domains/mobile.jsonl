@@ -1,0 +1,150 @@
+{"domain": "mobile", "question": "How do you scale push notifications from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "What trade-offs would you call out to a non-technical PM when proposing performance?"}
+{"domain": "mobile", "question": "How would you reduce cost for a system built around performance without harming reliability?"}
+{"domain": "mobile", "question": "Compare two approaches for performance. When would you choose one over the other?"}
+{"domain": "mobile", "question": "Troubleshoot a failure scenario related to testing. What logs, metrics, and traces would you check?"}
+{"domain": "mobile", "question": "How would you secure permissions? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "Troubleshoot a failure scenario related to release process. What logs, metrics, and traces would you check?"}
+{"domain": "mobile", "question": "How would you test android at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "How would you reduce cost for a system built around android without harming reliability?"}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for android? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "How do you scale release process from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to offline-first? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "How do you scale permissions from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "Troubleshoot a failure scenario related to performance. What logs, metrics, and traces would you check?"}
+{"domain": "mobile", "question": "Explain push notifications in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "Give a real-world example where offline-first matters. Outline the end-to-end architecture."}
+{"domain": "mobile", "question": "How would you secure offline-first? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for store guidelines? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "Explain permissions in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "Give a real-world example where app architecture matters. Outline the end-to-end architecture."}
+{"domain": "mobile", "question": "How would you test store guidelines at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "Troubleshoot a failure scenario related to push notifications. What logs, metrics, and traces would you check?"}
+{"domain": "mobile", "question": "What trade-offs would you call out to a non-technical PM when proposing release process?"}
+{"domain": "mobile", "question": "What trade-offs would you call out to a non-technical PM when proposing offline-first?"}
+{"domain": "mobile", "question": "How do you scale sync from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "Explain store guidelines in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "How would you test release process at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "How would you mentor a junior on mobile for their first 30-60-90 days?"}
+{"domain": "mobile", "question": "Compare two approaches for store guidelines. When would you choose one over the other?"}
+{"domain": "mobile", "question": "What are the first principles you apply when approaching problems in mobile?"}
+{"domain": "mobile", "question": "What trade-offs would you call out to a non-technical PM when proposing permissions?"}
+{"domain": "mobile", "question": "Compare two approaches for iOS. When would you choose one over the other?"}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for performance? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "What anti-patterns do you see often in mobile and how do you avoid them?"}
+{"domain": "mobile", "question": "Design a system leveraging testing. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "What telemetry would you add to observe app architecture? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "How would you reduce cost for a system built around iOS without harming reliability?"}
+{"domain": "mobile", "question": "How would you reduce cost for a system built around offline-first without harming reliability?"}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for release process? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "How would you reduce cost for a system built around app architecture without harming reliability?"}
+{"domain": "mobile", "question": "What telemetry would you add to observe performance? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "How would you reduce cost for a system built around push notifications without harming reliability?"}
+{"domain": "mobile", "question": "Compare two approaches for sync. When would you choose one over the other?"}
+{"domain": "mobile", "question": "How do you scale iOS from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "How would you test performance at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "Give a real-world example where store guidelines matters. Outline the end-to-end architecture."}
+{"domain": "mobile", "question": "Walk through a minimal baseline for push notifications, then evolve it to a production-grade solution."}
+{"domain": "mobile", "question": "How would you secure push notifications? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "What telemetry would you add to observe release process? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for offline-first? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "What are the performance bottlenecks in iOS and how would you mitigate them?"}
+{"domain": "mobile", "question": "How would you test sync at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "How would you secure testing? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "How would you secure store guidelines? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "What trade-offs would you call out to a non-technical PM when proposing iOS?"}
+{"domain": "mobile", "question": "Walk through a minimal baseline for sync, then evolve it to a production-grade solution."}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for app architecture? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "What are the performance bottlenecks in store guidelines and how would you mitigate them?"}
+{"domain": "mobile", "question": "Compare two approaches for push notifications. When would you choose one over the other?"}
+{"domain": "mobile", "question": "What are the performance bottlenecks in permissions and how would you mitigate them?"}
+{"domain": "mobile", "question": "How would you test permissions at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "What are the performance bottlenecks in release process and how would you mitigate them?"}
+{"domain": "mobile", "question": "Walk through a minimal baseline for release process, then evolve it to a production-grade solution."}
+{"domain": "mobile", "question": "Describe a blameless postmortem template tailored to incidents in mobile."}
+{"domain": "mobile", "question": "Design a system leveraging iOS. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "Design a system leveraging performance. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "Design a system leveraging permissions. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "Design a system leveraging release process. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "Explain app architecture in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "How would you reduce cost for a system built around permissions without harming reliability?"}
+{"domain": "mobile", "question": "What trade-offs would you call out to a non-technical PM when proposing testing?"}
+{"domain": "mobile", "question": "Design a system leveraging app architecture. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "Walk through a minimal baseline for store guidelines, then evolve it to a production-grade solution."}
+{"domain": "mobile", "question": "What telemetry would you add to observe testing? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for permissions? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to iOS? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "How would you test iOS at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "What trade-offs would you call out to a non-technical PM when proposing store guidelines?"}
+{"domain": "mobile", "question": "What telemetry would you add to observe iOS? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "Explain offline-first in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "Design a system leveraging store guidelines. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "Design a system leveraging offline-first. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "Design a system leveraging push notifications. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "How do you prioritize time/cost/quality trade-offs in mobile? Give an example."}
+{"domain": "mobile", "question": "What are the performance bottlenecks in offline-first and how would you mitigate them?"}
+{"domain": "mobile", "question": "Give a real-world example where android matters. Outline the end-to-end architecture."}
+{"domain": "mobile", "question": "How do you scale android from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to performance? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "Explain sync in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "Troubleshoot a failure scenario related to store guidelines. What logs, metrics, and traces would you check?"}
+{"domain": "mobile", "question": "Give a real-world example where testing matters. Outline the end-to-end architecture."}
+{"domain": "mobile", "question": "Troubleshoot a failure scenario related to app architecture. What logs, metrics, and traces would you check?"}
+{"domain": "mobile", "question": "Give a real-world example where push notifications matters. Outline the end-to-end architecture."}
+{"domain": "mobile", "question": "What telemetry would you add to observe offline-first? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "Design a system leveraging sync. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "Walk through a minimal baseline for offline-first, then evolve it to a production-grade solution."}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to testing? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "How do you scale performance from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "What are the performance bottlenecks in performance and how would you mitigate them?"}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for testing? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "Design a system leveraging android. Describe APIs, data models, and scaling considerations."}
+{"domain": "mobile", "question": "How would you test offline-first at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "How would you secure android? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "What telemetry would you add to observe android? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "Compare two approaches for testing. When would you choose one over the other?"}
+{"domain": "mobile", "question": "How would you secure sync? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "Troubleshoot a failure scenario related to iOS. What logs, metrics, and traces would you check?"}
+{"domain": "mobile", "question": "What are the performance bottlenecks in android and how would you mitigate them?"}
+{"domain": "mobile", "question": "How would you test push notifications at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "Walk through a minimal baseline for permissions, then evolve it to a production-grade solution."}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to sync? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to push notifications? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "How do you scale offline-first from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "What trade-offs would you call out to a non-technical PM when proposing android?"}
+{"domain": "mobile", "question": "Give a real-world example where sync matters. Outline the end-to-end architecture."}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for sync? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "What telemetry would you add to observe sync? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to release process? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "What telemetry would you add to observe store guidelines? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to permissions? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "Walk through a minimal baseline for iOS, then evolve it to a production-grade solution."}
+{"domain": "mobile", "question": "Compare two approaches for offline-first. When would you choose one over the other?"}
+{"domain": "mobile", "question": "How would you secure release process? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "Compare two approaches for app architecture. When would you choose one over the other?"}
+{"domain": "mobile", "question": "How do you scale app architecture from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "How would you test testing at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "Explain iOS in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "How would you secure iOS? Consider authN/Z, data protection, and least privilege."}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to android? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "How would you test app architecture at unit, integration, and e2e levels?"}
+{"domain": "mobile", "question": "Troubleshoot a failure scenario related to android. What logs, metrics, and traces would you check?"}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to app architecture? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "Explain testing in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "How do you scale store guidelines from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for push notifications? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "How do you scale testing from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "mobile", "question": "Compare two approaches for release process. When would you choose one over the other?"}
+{"domain": "mobile", "question": "Walk through a minimal baseline for testing, then evolve it to a production-grade solution."}
+{"domain": "mobile", "question": "What are the performance bottlenecks in push notifications and how would you mitigate them?"}
+{"domain": "mobile", "question": "Compare two approaches for permissions. When would you choose one over the other?"}
+{"domain": "mobile", "question": "Which metrics/SLIs best capture success for iOS? How do you alert without causing noise?"}
+{"domain": "mobile", "question": "Compare two approaches for android. When would you choose one over the other?"}
+{"domain": "mobile", "question": "Give a real-world example where release process matters. Outline the end-to-end architecture."}
+{"domain": "mobile", "question": "How would you reduce cost for a system built around release process without harming reliability?"}
+{"domain": "mobile", "question": "What are the performance bottlenecks in testing and how would you mitigate them?"}
+{"domain": "mobile", "question": "Explain release process in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "What telemetry would you add to observe permissions? (metrics, logs, traces)"}
+{"domain": "mobile", "question": "Explain performance in the context of mobile. Include pitfalls and best practices."}
+{"domain": "mobile", "question": "What would your rollout strategy be for a major change to store guidelines? (blue/green, canary, feature flags)"}
+{"domain": "mobile", "question": "How would you secure app architecture? Consider authN/Z, data protection, and least privilege."}

@@ -1,0 +1,150 @@
+{"domain": "security", "question": "Design a system leveraging threat modeling. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing secrets management?"}
+{"domain": "security", "question": "Design a system leveraging supply chain security. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to authN/authZ. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "How would you secure cryptography basics? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to authN/authZ? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to cryptography basics. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "How would you reduce cost for a system built around privacy without harming reliability?"}
+{"domain": "security", "question": "Walk through a minimal baseline for OWASP, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "What are the performance bottlenecks in threat modeling and how would you mitigate them?"}
+{"domain": "security", "question": "How would you secure secure defaults? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to secure defaults? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "Compare two approaches for secrets management. When would you choose one over the other?"}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to application security. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "How do you scale OWASP from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "What are the performance bottlenecks in secure defaults and how would you mitigate them?"}
+{"domain": "security", "question": "How would you secure authN/authZ? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "How do you scale privacy from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to privacy? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "Give a real-world example where OWASP matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "What telemetry would you add to observe threat modeling? (metrics, logs, traces)"}
+{"domain": "security", "question": "Give a real-world example where threat modeling matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "How would you test OWASP at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "How do you scale secure defaults from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for supply chain security? How do you alert without causing noise?"}
+{"domain": "security", "question": "How would you test cryptography basics at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "Compare two approaches for supply chain security. When would you choose one over the other?"}
+{"domain": "security", "question": "What are the performance bottlenecks in supply chain security and how would you mitigate them?"}
+{"domain": "security", "question": "How would you reduce cost for a system built around threat modeling without harming reliability?"}
+{"domain": "security", "question": "Design a system leveraging application security. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for secure defaults? How do you alert without causing noise?"}
+{"domain": "security", "question": "How would you reduce cost for a system built around cryptography basics without harming reliability?"}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to OWASP? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "How would you test application security at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to cloud security. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "Design a system leveraging secrets management. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "How would you secure cloud security? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "Give a real-world example where secrets management matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "How would you test threat modeling at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing threat modeling?"}
+{"domain": "security", "question": "Give a real-world example where secure defaults matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "How would you secure privacy? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "How would you test authN/authZ at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "How would you secure OWASP? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to threat modeling? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for secrets management? How do you alert without causing noise?"}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to OWASP. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "How would you test secure defaults at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "How would you reduce cost for a system built around secrets management without harming reliability?"}
+{"domain": "security", "question": "Describe a blameless postmortem template tailored to incidents in security."}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to cryptography basics? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "How would you test secrets management at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "How do you scale application security from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to privacy. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "How do you prioritize time/cost/quality trade-offs in security? Give an example."}
+{"domain": "security", "question": "How do you scale secrets management from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "Walk through a minimal baseline for cloud security, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "Design a system leveraging cloud security. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "Design a system leveraging authN/authZ. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "Give a real-world example where supply chain security matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "Walk through a minimal baseline for threat modeling, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "How would you reduce cost for a system built around supply chain security without harming reliability?"}
+{"domain": "security", "question": "Design a system leveraging secure defaults. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "Compare two approaches for OWASP. When would you choose one over the other?"}
+{"domain": "security", "question": "Compare two approaches for cloud security. When would you choose one over the other?"}
+{"domain": "security", "question": "Compare two approaches for threat modeling. When would you choose one over the other?"}
+{"domain": "security", "question": "Walk through a minimal baseline for privacy, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "How do you scale authN/authZ from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to secure defaults. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "Walk through a minimal baseline for supply chain security, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "Give a real-world example where authN/authZ matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to secrets management. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "Explain secure defaults in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "Compare two approaches for application security. When would you choose one over the other?"}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for cryptography basics? How do you alert without causing noise?"}
+{"domain": "security", "question": "What are the performance bottlenecks in secrets management and how would you mitigate them?"}
+{"domain": "security", "question": "Walk through a minimal baseline for authN/authZ, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "How do you scale cryptography basics from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for privacy? How do you alert without causing noise?"}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing OWASP?"}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for cloud security? How do you alert without causing noise?"}
+{"domain": "security", "question": "What anti-patterns do you see often in security and how do you avoid them?"}
+{"domain": "security", "question": "How do you scale threat modeling from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to supply chain security? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "How would you mentor a junior on security for their first 30-60-90 days?"}
+{"domain": "security", "question": "What are the performance bottlenecks in OWASP and how would you mitigate them?"}
+{"domain": "security", "question": "Explain threat modeling in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "What telemetry would you add to observe cloud security? (metrics, logs, traces)"}
+{"domain": "security", "question": "How would you test supply chain security at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "What telemetry would you add to observe OWASP? (metrics, logs, traces)"}
+{"domain": "security", "question": "What are the performance bottlenecks in authN/authZ and how would you mitigate them?"}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to supply chain security. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing application security?"}
+{"domain": "security", "question": "What telemetry would you add to observe supply chain security? (metrics, logs, traces)"}
+{"domain": "security", "question": "Design a system leveraging cryptography basics. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "How would you test privacy at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "What are the performance bottlenecks in application security and how would you mitigate them?"}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing secure defaults?"}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing privacy?"}
+{"domain": "security", "question": "How would you test cloud security at unit, integration, and e2e levels?"}
+{"domain": "security", "question": "Troubleshoot a failure scenario related to threat modeling. What logs, metrics, and traces would you check?"}
+{"domain": "security", "question": "How would you secure application security? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "How do you scale supply chain security from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for application security? How do you alert without causing noise?"}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to application security? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "What telemetry would you add to observe secure defaults? (metrics, logs, traces)"}
+{"domain": "security", "question": "How would you reduce cost for a system built around application security without harming reliability?"}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing authN/authZ?"}
+{"domain": "security", "question": "What telemetry would you add to observe cryptography basics? (metrics, logs, traces)"}
+{"domain": "security", "question": "Give a real-world example where privacy matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "Design a system leveraging OWASP. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "What telemetry would you add to observe application security? (metrics, logs, traces)"}
+{"domain": "security", "question": "Compare two approaches for authN/authZ. When would you choose one over the other?"}
+{"domain": "security", "question": "How would you secure secrets management? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "How would you reduce cost for a system built around authN/authZ without harming reliability?"}
+{"domain": "security", "question": "Explain privacy in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "Design a system leveraging privacy. Describe APIs, data models, and scaling considerations."}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for authN/authZ? How do you alert without causing noise?"}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to cloud security? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "Walk through a minimal baseline for application security, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "Give a real-world example where application security matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "Walk through a minimal baseline for secure defaults, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "What telemetry would you add to observe secrets management? (metrics, logs, traces)"}
+{"domain": "security", "question": "Which metrics/SLIs best capture success for OWASP? How do you alert without causing noise?"}
+{"domain": "security", "question": "Explain cryptography basics in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "How would you reduce cost for a system built around OWASP without harming reliability?"}
+{"domain": "security", "question": "Give a real-world example where cloud security matters. Outline the end-to-end architecture."}
+{"domain": "security", "question": "What would your rollout strategy be for a major change to secrets management? (blue/green, canary, feature flags)"}
+{"domain": "security", "question": "Explain authN/authZ in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "What telemetry would you add to observe authN/authZ? (metrics, logs, traces)"}
+{"domain": "security", "question": "Walk through a minimal baseline for secrets management, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "How would you secure threat modeling? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "What are the performance bottlenecks in privacy and how would you mitigate them?"}
+{"domain": "security", "question": "How would you secure supply chain security? Consider authN/Z, data protection, and least privilege."}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing cryptography basics?"}
+{"domain": "security", "question": "Explain secrets management in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing cloud security?"}
+{"domain": "security", "question": "Explain application security in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "What trade-offs would you call out to a non-technical PM when proposing supply chain security?"}
+{"domain": "security", "question": "Explain cloud security in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "How do you scale cloud security from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "security", "question": "Compare two approaches for cryptography basics. When would you choose one over the other?"}
+{"domain": "security", "question": "Explain OWASP in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "Compare two approaches for secure defaults. When would you choose one over the other?"}
+{"domain": "security", "question": "Compare two approaches for privacy. When would you choose one over the other?"}
+{"domain": "security", "question": "What are the first principles you apply when approaching problems in security?"}
+{"domain": "security", "question": "How would you reduce cost for a system built around cloud security without harming reliability?"}
+{"domain": "security", "question": "Explain supply chain security in the context of security. Include pitfalls and best practices."}
+{"domain": "security", "question": "Walk through a minimal baseline for cryptography basics, then evolve it to a production-grade solution."}
+{"domain": "security", "question": "What telemetry would you add to observe privacy? (metrics, logs, traces)"}

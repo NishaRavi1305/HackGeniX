@@ -29,6 +29,10 @@ from src.models.interview import (
     InterviewReportResponse,
 )
 from src.models.documents import ParsedResume, ParsedJobDescription
+from src.models.question_bank import (
+    QuestionBankConfig,
+    InterviewStageHint,
+)
 from src.services.question_generator import (
     QuestionGenerator,
     QuestionGenerationRequest,
@@ -40,6 +44,10 @@ from src.services.answer_evaluator import (
     AnswerEvaluation,
     InterviewReport,
     get_answer_evaluator,
+)
+from src.services.hybrid_question_selector import (
+    HybridQuestionSelector,
+    get_hybrid_question_selector,
 )
 from src.services.prompts import (
     InterviewStage as PromptStage,
@@ -81,6 +89,7 @@ class InterviewOrchestrator:
         self,
         question_generator: Optional[QuestionGenerator] = None,
         answer_evaluator: Optional[AnswerEvaluator] = None,
+        hybrid_selector: Optional[HybridQuestionSelector] = None,
     ):
         """
         Initialize the orchestrator.
@@ -88,9 +97,11 @@ class InterviewOrchestrator:
         Args:
             question_generator: Question generation service
             answer_evaluator: Answer evaluation service
+            hybrid_selector: Hybrid question selector (Phase 6.5)
         """
         self._question_generator = question_generator
         self._answer_evaluator = answer_evaluator
+        self._hybrid_selector = hybrid_selector
         
         # In-memory session storage (replace with DB in production)
         self._sessions: Dict[str, InterviewSession] = {}
@@ -111,6 +122,12 @@ class InterviewOrchestrator:
             self._answer_evaluator = get_answer_evaluator()
         return self._answer_evaluator
     
+    @property
+    def hybrid_selector(self) -> HybridQuestionSelector:
+        if self._hybrid_selector is None:
+            self._hybrid_selector = get_hybrid_question_selector()
+        return self._hybrid_selector
+    
     async def _get_stt_provider(self):
         """Get STT provider (lazy load)."""
         if self._stt_provider is None:
@@ -128,6 +145,17 @@ class InterviewOrchestrator:
     def _stage_to_prompt_stage(self, stage: InterviewStage) -> PromptStage:
         """Convert interview stage to prompt stage enum."""
         return PromptStage(stage.value)
+    
+    def _stage_to_stage_hint(self, stage: InterviewStage) -> InterviewStageHint:
+        """Convert interview stage to question bank stage hint."""
+        mapping = {
+            InterviewStage.SCREENING: InterviewStageHint.SCREENING,
+            InterviewStage.TECHNICAL: InterviewStageHint.TECHNICAL,
+            InterviewStage.BEHAVIORAL: InterviewStageHint.BEHAVIORAL,
+            InterviewStage.SYSTEM_DESIGN: InterviewStageHint.SYSTEM_DESIGN,
+            InterviewStage.WRAP_UP: InterviewStageHint.GENERAL,
+        }
+        return mapping.get(stage, InterviewStageHint.TECHNICAL)
     
     def _get_stage_question_count(self, config: InterviewConfig, stage: InterviewStage) -> int:
         """Get the number of questions for a stage from config."""
@@ -181,12 +209,24 @@ class InterviewOrchestrator:
         )
         
         try:
-            generated = await self.question_generator.generate_questions(
-                request=request,
-                resume=resume,
-                jd=jd,
-                previous_questions=previous_questions,
-            )
+            # Phase 6.5: Check if hybrid mode is enabled
+            if config.use_question_bank:
+                generated = await self._generate_hybrid_questions(
+                    request=request,
+                    stage=stage,
+                    resume=resume,
+                    jd=jd,
+                    config=config,
+                    previous_questions=previous_questions,
+                )
+            else:
+                # Pure LLM generation (original behavior)
+                generated = await self.question_generator.generate_questions(
+                    request=request,
+                    resume=resume,
+                    jd=jd,
+                    previous_questions=previous_questions,
+                )
             
             # Convert to InterviewQuestion models
             questions = []
@@ -202,6 +242,7 @@ class InterviewOrchestrator:
                     follow_up_questions=gq.follow_up_questions,
                     duration_seconds=gq.duration_seconds,
                     competency=gq.competency,
+                    source=gq.source.value if hasattr(gq, 'source') else "generated",
                 ))
             
             return questions
@@ -210,6 +251,57 @@ class InterviewOrchestrator:
             logger.error(f"Failed to generate {stage.value} questions: {e}")
             # Return fallback questions
             return self._get_fallback_questions(stage, num_questions)
+    
+    async def _generate_hybrid_questions(
+        self,
+        request: QuestionGenerationRequest,
+        stage: InterviewStage,
+        resume: ParsedResume,
+        jd: ParsedJobDescription,
+        config: InterviewConfig,
+        previous_questions: Optional[List[str]] = None,
+    ) -> List[GeneratedQuestion]:
+        """
+        Generate questions using hybrid mode (Phase 6.5).
+        
+        Uses the question bank for base questions and LLM for enhancement/gap-filling.
+        """
+        # Build question bank config from interview config
+        bank_config = QuestionBankConfig(
+            use_question_bank=config.use_question_bank,
+            enabled_domains=config.enabled_domains,
+            auto_detect_domains=config.auto_detect_domains,
+            bank_question_ratio=config.bank_question_ratio,
+            allow_rephrasing=config.allow_rephrasing,
+            allow_personalization=config.allow_personalization,
+        )
+        
+        # Select questions from bank
+        stage_hint = self._stage_to_stage_hint(stage)
+        
+        bank_questions, uncovered_skills = await self.hybrid_selector.select_questions(
+            jd=jd,
+            resume=resume,
+            config=bank_config,
+            stage=stage_hint,
+            count=request.num_questions,
+        )
+        
+        logger.info(
+            f"Hybrid mode for {stage.value}: {len(bank_questions)} bank questions, "
+            f"{len(uncovered_skills)} uncovered skills"
+        )
+        
+        # Generate using hybrid method
+        return await self.question_generator.generate_questions_hybrid(
+            request=request,
+            resume=resume,
+            jd=jd,
+            bank_config=bank_config,
+            bank_questions=bank_questions,
+            uncovered_skills=uncovered_skills,
+            previous_questions=previous_questions,
+        )
     
     def _get_fallback_questions(self, stage: InterviewStage, count: int) -> List[InterviewQuestion]:
         """Get fallback questions if generation fails."""
@@ -764,6 +856,155 @@ class InterviewOrchestrator:
             next_steps=report.next_steps,
             question_evaluations=[e.to_dict() for e in report.evaluations],
         )
+    
+    async def export_pdf(self, session_id: str, save_path: Optional[str] = None) -> bytes:
+        """
+        Generate a PDF report for a completed interview.
+        
+        Args:
+            session_id: Interview session ID
+            save_path: Optional path to save the PDF (uses default if None)
+            
+        Returns:
+            PDF content as bytes
+        """
+        from src.models.report import (
+            FullInterviewReport,
+            ReportMetadata,
+            CandidateInfo,
+            ScoreBreakdown,
+            ScoreSection,
+            QuestionSummary,
+            ReportStrength,
+            ReportConcern,
+            HiringRecommendation,
+            RecommendationDecision,
+            SeverityLevel,
+        )
+        from src.services.pdf_generator import PDFReportGenerator
+        
+        session = self.get_session(session_id)
+        if not session:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        # Generate the report data first
+        report_response = await self.generate_report(session_id)
+        
+        # Build metadata
+        metadata = ReportMetadata(session_id=session_id)
+        
+        # Build candidate info
+        interview_date = session.started_at or session.created_at
+        candidate = CandidateInfo(
+            name=report_response.candidate_name,
+            role_title=report_response.role_title,
+            interview_date=interview_date,
+            duration_minutes=report_response.duration_minutes,
+        )
+        
+        # Build score breakdown
+        scores = ScoreBreakdown(
+            overall=ScoreSection(
+                category="Overall",
+                score=report_response.overall_score,
+                description="Composite score across all evaluation areas",
+            ),
+            technical=ScoreSection(
+                category="Technical",
+                score=report_response.technical_score,
+                description="Technical knowledge and problem-solving ability",
+            ),
+            behavioral=ScoreSection(
+                category="Behavioral",
+                score=report_response.behavioral_score,
+                description="Soft skills, teamwork, and cultural fit",
+            ),
+            communication=ScoreSection(
+                category="Communication",
+                score=report_response.communication_score,
+                description="Clarity, articulation, and professional communication",
+            ),
+        )
+        
+        # Build strengths
+        strengths = []
+        for s in report_response.strengths:
+            if isinstance(s, dict):
+                strengths.append(ReportStrength(
+                    title=s.get("title", s.get("area", "Strength")),
+                    evidence=s.get("evidence", s.get("description", str(s))),
+                    impact_level=s.get("impact", "medium"),
+                ))
+            elif isinstance(s, str):
+                strengths.append(ReportStrength(title="Strength", evidence=s))
+        
+        # Build concerns
+        concerns = []
+        for c in report_response.concerns:
+            if isinstance(c, dict):
+                severity_str = c.get("severity", "medium")
+                try:
+                    severity = SeverityLevel(severity_str)
+                except ValueError:
+                    severity = SeverityLevel.MEDIUM
+                concerns.append(ReportConcern(
+                    title=c.get("title", c.get("area", "Concern")),
+                    evidence=c.get("evidence", c.get("description", str(c))),
+                    severity=severity,
+                    suggestion=c.get("suggestion"),
+                ))
+            elif isinstance(c, str):
+                concerns.append(ReportConcern(title="Area for Improvement", evidence=c))
+        
+        # Build question evaluations
+        question_evals = []
+        for i, e in enumerate(report_response.question_evaluations):
+            question_evals.append(QuestionSummary(
+                question_id=e.get("question_id", f"q_{i}"),
+                question_text=e.get("question", ""),
+                answer_text=e.get("answer", ""),
+                stage=e.get("stage", "unknown"),
+                score=e.get("scores", {}).get("overall", 0),
+                strengths=e.get("strengths", []),
+                improvements=e.get("improvements", []),
+                key_feedback=e.get("notes"),
+                recommendation=e.get("recommendation", "acceptable"),
+            ))
+        
+        # Build recommendation
+        try:
+            decision = RecommendationDecision(report_response.recommendation)
+        except ValueError:
+            decision = RecommendationDecision.NO_HIRE
+        
+        recommendation = HiringRecommendation(
+            decision=decision,
+            confidence_percent=report_response.confidence,
+            reasoning=report_response.reasoning,
+            next_steps=report_response.next_steps,
+        )
+        
+        # Create full report
+        full_report = FullInterviewReport(
+            metadata=metadata,
+            candidate=candidate,
+            executive_summary=report_response.executive_summary,
+            scores=scores,
+            strengths=strengths,
+            concerns=concerns,
+            question_evaluations=question_evals,
+            recommendation=recommendation,
+        )
+        
+        # Generate PDF
+        generator = PDFReportGenerator(full_report)
+        
+        if save_path:
+            generator.save(save_path)
+            with open(save_path, "rb") as f:
+                return f.read()
+        else:
+            return generator.generate()
     
     def pause_interview(self, session_id: str) -> InterviewSession:
         """Pause an interview session."""

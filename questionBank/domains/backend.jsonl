@@ -1,0 +1,150 @@
+{"domain": "backend", "question": "How do you scale event-driven from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "Which metrics/SLIs best capture success for queues? How do you alert without causing noise?"}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to gRPC? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "Describe a blameless postmortem template tailored to incidents in backend."}
+{"domain": "backend", "question": "How do you prioritize time/cost/quality trade-offs in backend? Give an example."}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to queues? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "Compare two approaches for caching. When would you choose one over the other?"}
+{"domain": "backend", "question": "What are the performance bottlenecks in microservices and how would you mitigate them?"}
+{"domain": "backend", "question": "Explain database indexing in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "How would you test idempotency at unit, integration, and e2e levels?"}
+{"domain": "backend", "question": "How would you reduce cost for a system built around idempotency without harming reliability?"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to idempotency. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "Explain microservices in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "Explain queues in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to caching? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "How would you test queues at unit, integration, and e2e levels?"}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing gRPC?"}
+{"domain": "backend", "question": "Give a real-world example where database indexing matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to observability? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "Explain caching in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "Design a system leveraging event-driven. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "Compare two approaches for event-driven. When would you choose one over the other?"}
+{"domain": "backend", "question": "Design a system leveraging caching. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "How do you scale microservices from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "Explain backpressure in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "What are the performance bottlenecks in queues and how would you mitigate them?"}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to database indexing? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to idempotency? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to gRPC. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "Explain event-driven in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to REST APIs? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "How would you secure event-driven? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "How do you scale distributed locking from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "What telemetry would you add to observe event-driven? (metrics, logs, traces)"}
+{"domain": "backend", "question": "What are the performance bottlenecks in observability and how would you mitigate them?"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to microservices. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "How would you reduce cost for a system built around queues without harming reliability?"}
+{"domain": "backend", "question": "Compare two approaches for REST APIs. When would you choose one over the other?"}
+{"domain": "backend", "question": "Give a real-world example where observability matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "Walk through a minimal baseline for microservices, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "How would you test REST APIs at unit, integration, and e2e levels?"}
+{"domain": "backend", "question": "How would you secure backpressure? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "Design a system leveraging database indexing. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "How would you reduce cost for a system built around observability without harming reliability?"}
+{"domain": "backend", "question": "Walk through a minimal baseline for backpressure, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "Walk through a minimal baseline for gRPC, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "How would you secure idempotency? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing REST APIs?"}
+{"domain": "backend", "question": "What telemetry would you add to observe observability? (metrics, logs, traces)"}
+{"domain": "backend", "question": "What are the performance bottlenecks in distributed locking and how would you mitigate them?"}
+{"domain": "backend", "question": "Which metrics/SLIs best capture success for database indexing? How do you alert without causing noise?"}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing queues?"}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing microservices?"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to event-driven. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "How do you scale backpressure from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "Design a system leveraging distributed locking. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "Which metrics/SLIs best capture success for microservices? How do you alert without causing noise?"}
+{"domain": "backend", "question": "What telemetry would you add to observe backpressure? (metrics, logs, traces)"}
+{"domain": "backend", "question": "How would you test event-driven at unit, integration, and e2e levels?"}
+{"domain": "backend", "question": "How would you reduce cost for a system built around database indexing without harming reliability?"}
+{"domain": "backend", "question": "Explain gRPC in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "What are the performance bottlenecks in backpressure and how would you mitigate them?"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to observability. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "Compare two approaches for observability. When would you choose one over the other?"}
+{"domain": "backend", "question": "How would you secure distributed locking? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "Compare two approaches for backpressure. When would you choose one over the other?"}
+{"domain": "backend", "question": "Compare two approaches for database indexing. When would you choose one over the other?"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to database indexing. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "Which metrics/SLIs best capture success for backpressure? How do you alert without causing noise?"}
+{"domain": "backend", "question": "How would you secure REST APIs? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "Walk through a minimal baseline for distributed locking, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "Give a real-world example where backpressure matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "What telemetry would you add to observe caching? (metrics, logs, traces)"}
+{"domain": "backend", "question": "Design a system leveraging gRPC. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to REST APIs. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "Design a system leveraging microservices. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "How would you secure gRPC? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "Design a system leveraging queues. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "What are the performance bottlenecks in database indexing and how would you mitigate them?"}
+{"domain": "backend", "question": "Walk through a minimal baseline for observability, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to caching. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to queues. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "Design a system leveraging idempotency. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "How would you mentor a junior on backend for their first 30-60-90 days?"}
+{"domain": "backend", "question": "Give a real-world example where caching matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "Design a system leveraging backpressure. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "How do you scale database indexing from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing caching?"}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing database indexing?"}
+{"domain": "backend", "question": "What telemetry would you add to observe microservices? (metrics, logs, traces)"}
+{"domain": "backend", "question": "How would you reduce cost for a system built around backpressure without harming reliability?"}
+{"domain": "backend", "question": "How would you secure observability? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "How do you scale observability from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "Which metrics/SLIs best capture success for distributed locking? How do you alert without causing noise?"}
+{"domain": "backend", "question": "Give a real-world example where gRPC matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to microservices? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "What are the performance bottlenecks in caching and how would you mitigate them?"}
+{"domain": "backend", "question": "How would you reduce cost for a system built around event-driven without harming reliability?"}
+{"domain": "backend", "question": "What telemetry would you add to observe gRPC? (metrics, logs, traces)"}
+{"domain": "backend", "question": "How would you secure database indexing? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "Compare two approaches for idempotency. When would you choose one over the other?"}
+{"domain": "backend", "question": "How do you scale queues from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "Walk through a minimal baseline for event-driven, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "Compare two approaches for queues. When would you choose one over the other?"}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing backpressure?"}
+{"domain": "backend", "question": "How would you reduce cost for a system built around gRPC without harming reliability?"}
+{"domain": "backend", "question": "How would you test gRPC at unit, integration, and e2e levels?"}
+{"domain": "backend", "question": "Give a real-world example where REST APIs matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "Compare two approaches for distributed locking. When would you choose one over the other?"}
+{"domain": "backend", "question": "How do you scale REST APIs from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "Give a real-world example where idempotency matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "Give a real-world example where microservices matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "How would you test backpressure at unit, integration, and e2e levels?"}
+{"domain": "backend", "question": "Give a real-world example where queues matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "Design a system leveraging REST APIs. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "Which metrics/SLIs best capture success for event-driven? How do you alert without causing noise?"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to backpressure. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "Walk through a minimal baseline for database indexing, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing observability?"}
+{"domain": "backend", "question": "What are the performance bottlenecks in event-driven and how would you mitigate them?"}
+{"domain": "backend", "question": "Explain idempotency in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to event-driven? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "Walk through a minimal baseline for idempotency, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "How would you reduce cost for a system built around distributed locking without harming reliability?"}
+{"domain": "backend", "question": "Explain REST APIs in the context of backend. Include pitfalls and best practices."}
+{"domain": "backend", "question": "What would your rollout strategy be for a major change to backpressure? (blue/green, canary, feature flags)"}
+{"domain": "backend", "question": "Give a real-world example where distributed locking matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "Compare two approaches for gRPC. When would you choose one over the other?"}
+{"domain": "backend", "question": "Walk through a minimal baseline for queues, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "How do you scale idempotency from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "What are the performance bottlenecks in REST APIs and how would you mitigate them?"}
+{"domain": "backend", "question": "Walk through a minimal baseline for caching, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "What trade-offs would you call out to a non-technical PM when proposing event-driven?"}
+{"domain": "backend", "question": "Walk through a minimal baseline for REST APIs, then evolve it to a production-grade solution."}
+{"domain": "backend", "question": "Compare two approaches for microservices. When would you choose one over the other?"}
+{"domain": "backend", "question": "What anti-patterns do you see often in backend and how do you avoid them?"}
+{"domain": "backend", "question": "What telemetry would you add to observe REST APIs? (metrics, logs, traces)"}
+{"domain": "backend", "question": "Which metrics/SLIs best capture success for observability? How do you alert without causing noise?"}
+{"domain": "backend", "question": "How do you scale gRPC from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "backend", "question": "How would you secure queues? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "What are the performance bottlenecks in idempotency and how would you mitigate them?"}
+{"domain": "backend", "question": "Design a system leveraging observability. Describe APIs, data models, and scaling considerations."}
+{"domain": "backend", "question": "Give a real-world example where event-driven matters. Outline the end-to-end architecture."}
+{"domain": "backend", "question": "How would you secure microservices? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "What telemetry would you add to observe idempotency? (metrics, logs, traces)"}
+{"domain": "backend", "question": "How would you secure caching? Consider authN/Z, data protection, and least privilege."}
+{"domain": "backend", "question": "How would you test caching at unit, integration, and e2e levels?"}
+{"domain": "backend", "question": "Troubleshoot a failure scenario related to distributed locking. What logs, metrics, and traces would you check?"}
+{"domain": "backend", "question": "What are the performance bottlenecks in gRPC and how would you mitigate them?"}
+{"domain": "backend", "question": "Which metrics/SLIs best capture success for gRPC? How do you alert without causing noise?"}

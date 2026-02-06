@@ -1,0 +1,150 @@
+{"domain": "devops_sre", "question": "What telemetry would you add to observe CI/CD? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing SLO/SLI/SLA?"}
+{"domain": "devops_sre", "question": "How would you secure scaling? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in CI/CD and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "Compare two approaches for containers. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for incident response, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "Explain incident response in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "Explain scaling in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in service mesh and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe containers? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "Compare two approaches for blue-green. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "How would you test CI/CD at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to kubernetes. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to service mesh. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "Design a system leveraging observability. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "How do you scale observability from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for containers? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "How would you mentor a junior on devops sre for their first 30-60-90 days?"}
+{"domain": "devops_sre", "question": "What would your rollout strategy be for a major change to service mesh? (blue/green, canary, feature flags)"}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to observability. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "Design a system leveraging kubernetes. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "What would your rollout strategy be for a major change to incident response? (blue/green, canary, feature flags)"}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around scaling without harming reliability?"}
+{"domain": "devops_sre", "question": "Design a system leveraging incident response. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "Explain canary in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "What would your rollout strategy be for a major change to canary? (blue/green, canary, feature flags)"}
+{"domain": "devops_sre", "question": "Explain kubernetes in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "How would you secure incident response? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe service mesh? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for observability? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for service mesh? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing service mesh?"}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing kubernetes?"}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around service mesh without harming reliability?"}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe incident response? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "Explain SLO/SLI/SLA in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around incident response without harming reliability?"}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to scaling. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for observability, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe canary? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing infrastructure as code?"}
+{"domain": "devops_sre", "question": "Give a real-world example where service mesh matters. Outline the end-to-end architecture."}
+{"domain": "devops_sre", "question": "Design a system leveraging CI/CD. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around blue-green without harming reliability?"}
+{"domain": "devops_sre", "question": "How do you scale service mesh from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "How do you prioritize time/cost/quality trade-offs in devops sre? Give an example."}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around CI/CD without harming reliability?"}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for kubernetes, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "Design a system leveraging containers. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "Describe a blameless postmortem template tailored to incidents in devops sre."}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for CI/CD, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "How do you scale SLO/SLI/SLA from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "Give a real-world example where canary matters. Outline the end-to-end architecture."}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for kubernetes? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for scaling? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around infrastructure as code without harming reliability?"}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around canary without harming reliability?"}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe observability? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to incident response. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in canary and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "How would you test blue-green at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing CI/CD?"}
+{"domain": "devops_sre", "question": "What would your rollout strategy be for a major change to containers? (blue/green, canary, feature flags)"}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for blue-green? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "How would you secure SLO/SLI/SLA? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "How would you secure kubernetes? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe blue-green? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "Explain containers in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for canary, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for scaling, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "How would you secure observability? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "How would you test service mesh at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "Compare two approaches for service mesh. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in incident response and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "Design a system leveraging infrastructure as code. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "How do you scale containers from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "What would your rollout strategy be for a major change to scaling? (blue/green, canary, feature flags)"}
+{"domain": "devops_sre", "question": "Compare two approaches for CI/CD. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "How do you scale scaling from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to SLO/SLI/SLA. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in scaling and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "Give a real-world example where kubernetes matters. Outline the end-to-end architecture."}
+{"domain": "devops_sre", "question": "How would you test scaling at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in blue-green and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "How do you scale blue-green from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "What would your rollout strategy be for a major change to infrastructure as code? (blue/green, canary, feature flags)"}
+{"domain": "devops_sre", "question": "Explain blue-green in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for containers, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "How do you scale infrastructure as code from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "Give a real-world example where scaling matters. Outline the end-to-end architecture."}
+{"domain": "devops_sre", "question": "How do you scale kubernetes from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "Compare two approaches for observability. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "How do you scale incident response from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for infrastructure as code? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "Compare two approaches for SLO/SLI/SLA. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "How would you secure CI/CD? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to canary. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "What would your rollout strategy be for a major change to blue-green? (blue/green, canary, feature flags)"}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing observability?"}
+{"domain": "devops_sre", "question": "Give a real-world example where observability matters. Outline the end-to-end architecture."}
+{"domain": "devops_sre", "question": "Explain CI/CD in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "How do you scale CI/CD from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for CI/CD? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for canary? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "Explain observability in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to blue-green. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "Give a real-world example where blue-green matters. Outline the end-to-end architecture."}
+{"domain": "devops_sre", "question": "How would you secure blue-green? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "How would you test canary at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "Give a real-world example where CI/CD matters. Outline the end-to-end architecture."}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in SLO/SLI/SLA and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "How would you test kubernetes at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe scaling? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "What are the first principles you apply when approaching problems in devops sre?"}
+{"domain": "devops_sre", "question": "Explain infrastructure as code in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "Troubleshoot a failure scenario related to containers. What logs, metrics, and traces would you check?"}
+{"domain": "devops_sre", "question": "How would you test infrastructure as code at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing incident response?"}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe SLO/SLI/SLA? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "Compare two approaches for canary. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in kubernetes and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "Compare two approaches for incident response. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "How would you secure canary? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe kubernetes? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around containers without harming reliability?"}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for SLO/SLI/SLA? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "How would you test containers at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "How would you reduce cost for a system built around observability without harming reliability?"}
+{"domain": "devops_sre", "question": "What would your rollout strategy be for a major change to SLO/SLI/SLA? (blue/green, canary, feature flags)"}
+{"domain": "devops_sre", "question": "Design a system leveraging blue-green. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "Design a system leveraging canary. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "What telemetry would you add to observe infrastructure as code? (metrics, logs, traces)"}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for infrastructure as code, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "Give a real-world example where infrastructure as code matters. Outline the end-to-end architecture."}
+{"domain": "devops_sre", "question": "Compare two approaches for kubernetes. When would you choose one over the other?"}
+{"domain": "devops_sre", "question": "How do you scale canary from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "devops_sre", "question": "How would you secure infrastructure as code? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "Explain service mesh in the context of devops sre. Include pitfalls and best practices."}
+{"domain": "devops_sre", "question": "What are the performance bottlenecks in observability and how would you mitigate them?"}
+{"domain": "devops_sre", "question": "What anti-patterns do you see often in devops sre and how do you avoid them?"}
+{"domain": "devops_sre", "question": "Design a system leveraging SLO/SLI/SLA. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for blue-green, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "How would you secure service mesh? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "How would you test observability at unit, integration, and e2e levels?"}
+{"domain": "devops_sre", "question": "How would you secure containers? Consider authN/Z, data protection, and least privilege."}
+{"domain": "devops_sre", "question": "Design a system leveraging scaling. Describe APIs, data models, and scaling considerations."}
+{"domain": "devops_sre", "question": "Which metrics/SLIs best capture success for incident response? How do you alert without causing noise?"}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing containers?"}
+{"domain": "devops_sre", "question": "Walk through a minimal baseline for SLO/SLI/SLA, then evolve it to a production-grade solution."}
+{"domain": "devops_sre", "question": "What trade-offs would you call out to a non-technical PM when proposing scaling?"}

@@ -1,0 +1,150 @@
+{"domain": "ml_ops", "question": "How would you secure batch vs realtime inference? Consider authN/Z, data protection, and least privilege."}
+{"domain": "ml_ops", "question": "How would you secure feature stores? Consider authN/Z, data protection, and least privilege."}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to data contracts? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around feature stores without harming reliability?"}
+{"domain": "ml_ops", "question": "Compare two approaches for rollbacks. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for monitoring, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "Compare two approaches for drift detection. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing deployment?"}
+{"domain": "ml_ops", "question": "How would you test monitoring at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for rollbacks? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing shadow traffic?"}
+{"domain": "ml_ops", "question": "Compare two approaches for model registry. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for feature stores? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "Explain deployment in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "Explain rollbacks in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe shadow traffic? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to shadow traffic? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "Give a real-world example where shadow traffic matters. Outline the end-to-end architecture."}
+{"domain": "ml_ops", "question": "How would you test deployment at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "How would you secure A/B testing? Consider authN/Z, data protection, and least privilege."}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing monitoring?"}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to monitoring? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around drift detection without harming reliability?"}
+{"domain": "ml_ops", "question": "How would you test shadow traffic at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to model registry. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to feature stores. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around rollbacks without harming reliability?"}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe deployment? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "How would you test feature stores at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "Compare two approaches for deployment. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to batch vs realtime inference. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "How do you scale drift detection from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "Give a real-world example where deployment matters. Outline the end-to-end architecture."}
+{"domain": "ml_ops", "question": "Compare two approaches for monitoring. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around data contracts without harming reliability?"}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for batch vs realtime inference, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "How do you scale feature stores from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to feature stores? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "How would you secure model registry? Consider authN/Z, data protection, and least privilege."}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe rollbacks? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "Give a real-world example where feature stores matters. Outline the end-to-end architecture."}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around model registry without harming reliability?"}
+{"domain": "ml_ops", "question": "How would you secure monitoring? Consider authN/Z, data protection, and least privilege."}
+{"domain": "ml_ops", "question": "Explain model registry in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "Give a real-world example where rollbacks matters. Outline the end-to-end architecture."}
+{"domain": "ml_ops", "question": "How do you scale rollbacks from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for deployment? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to A/B testing. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to monitoring. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for A/B testing, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe feature stores? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around shadow traffic without harming reliability?"}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in batch vs realtime inference and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing drift detection?"}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe batch vs realtime inference? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "How would you test batch vs realtime inference at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "Explain monitoring in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "What are the first principles you apply when approaching problems in ml ops?"}
+{"domain": "ml_ops", "question": "Give a real-world example where drift detection matters. Outline the end-to-end architecture."}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in monitoring and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "Design a system leveraging batch vs realtime inference. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "Compare two approaches for shadow traffic. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "How do you scale deployment from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in rollbacks and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for drift detection? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for model registry? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing A/B testing?"}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for feature stores, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "Give a real-world example where A/B testing matters. Outline the end-to-end architecture."}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in drift detection and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in data contracts and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for model registry, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "Explain feature stores in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe data contracts? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "How would you secure shadow traffic? Consider authN/Z, data protection, and least privilege."}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing batch vs realtime inference?"}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to rollbacks? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around batch vs realtime inference without harming reliability?"}
+{"domain": "ml_ops", "question": "Explain shadow traffic in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "Design a system leveraging A/B testing. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for rollbacks, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for drift detection, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "How do you scale model registry from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe model registry? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "How do you scale data contracts from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "Design a system leveraging model registry. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in feature stores and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "How do you scale monitoring from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to model registry? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for data contracts, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in deployment and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for monitoring? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to rollbacks. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "Explain data contracts in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for A/B testing? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "How do you scale batch vs realtime inference from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "How would you test rollbacks at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "Design a system leveraging drift detection. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in model registry and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "Explain A/B testing in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to drift detection? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "Explain drift detection in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe drift detection? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "Design a system leveraging data contracts. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "How would you test drift detection at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for deployment, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "How would you mentor a junior on ml ops for their first 30-60-90 days?"}
+{"domain": "ml_ops", "question": "Design a system leveraging deployment. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to deployment? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around monitoring without harming reliability?"}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for shadow traffic? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "Walk through a minimal baseline for shadow traffic, then evolve it to a production-grade solution."}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to shadow traffic. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "How would you secure data contracts? Consider authN/Z, data protection, and least privilege."}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe A/B testing? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "Compare two approaches for feature stores. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "Design a system leveraging shadow traffic. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "Explain batch vs realtime inference in the context of ml ops. Include pitfalls and best practices."}
+{"domain": "ml_ops", "question": "What anti-patterns do you see often in ml ops and how do you avoid them?"}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to drift detection. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "Design a system leveraging rollbacks. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to data contracts. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "How would you test model registry at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "How do you scale A/B testing from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "Give a real-world example where data contracts matters. Outline the end-to-end architecture."}
+{"domain": "ml_ops", "question": "What telemetry would you add to observe monitoring? (metrics, logs, traces)"}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing data contracts?"}
+{"domain": "ml_ops", "question": "How would you test data contracts at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "Troubleshoot a failure scenario related to deployment. What logs, metrics, and traces would you check?"}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing model registry?"}
+{"domain": "ml_ops", "question": "Describe a blameless postmortem template tailored to incidents in ml ops."}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in A/B testing and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to batch vs realtime inference? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around deployment without harming reliability?"}
+{"domain": "ml_ops", "question": "What trade-offs would you call out to a non-technical PM when proposing feature stores?"}
+{"domain": "ml_ops", "question": "How do you prioritize time/cost/quality trade-offs in ml ops? Give an example."}
+{"domain": "ml_ops", "question": "Give a real-world example where monitoring matters. Outline the end-to-end architecture."}
+{"domain": "ml_ops", "question": "What would your rollout strategy be for a major change to A/B testing? (blue/green, canary, feature flags)"}
+{"domain": "ml_ops", "question": "Design a system leveraging monitoring. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "How would you secure deployment? Consider authN/Z, data protection, and least privilege."}
+{"domain": "ml_ops", "question": "Compare two approaches for data contracts. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "How would you test A/B testing at unit, integration, and e2e levels?"}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for data contracts? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "What are the performance bottlenecks in shadow traffic and how would you mitigate them?"}
+{"domain": "ml_ops", "question": "How do you scale shadow traffic from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "ml_ops", "question": "Which metrics/SLIs best capture success for batch vs realtime inference? How do you alert without causing noise?"}
+{"domain": "ml_ops", "question": "Compare two approaches for batch vs realtime inference. When would you choose one over the other?"}
+{"domain": "ml_ops", "question": "Design a system leveraging feature stores. Describe APIs, data models, and scaling considerations."}
+{"domain": "ml_ops", "question": "How would you reduce cost for a system built around A/B testing without harming reliability?"}
+{"domain": "ml_ops", "question": "Give a real-world example where batch vs realtime inference matters. Outline the end-to-end architecture."}

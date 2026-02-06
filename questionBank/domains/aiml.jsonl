@@ -1,0 +1,150 @@
+{"domain": "aiml", "question": "How would you reduce cost for a system built around unsupervised learning without harming reliability?"}
+{"domain": "aiml", "question": "What are the performance bottlenecks in RAG and how would you mitigate them?"}
+{"domain": "aiml", "question": "Compare two approaches for quantization. When would you choose one over the other?"}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing deep learning?"}
+{"domain": "aiml", "question": "How would you test unsupervised learning at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to deep learning? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "How do you scale vector databases from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "What anti-patterns do you see often in aiml and how do you avoid them?"}
+{"domain": "aiml", "question": "How would you test deep learning at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "Give a real-world example where vector databases matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Design a system leveraging evaluation metrics. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to prompting vs fine-tuning? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "Describe a blameless postmortem template tailored to incidents in aiml."}
+{"domain": "aiml", "question": "Design a system leveraging RAG. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "What telemetry would you add to observe RAG? (metrics, logs, traces)"}
+{"domain": "aiml", "question": "What are the performance bottlenecks in evaluation metrics and how would you mitigate them?"}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to RAG? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "Walk through a minimal baseline for attention, then evolve it to a production-grade solution."}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for RAG? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "What are the performance bottlenecks in supervised learning and how would you mitigate them?"}
+{"domain": "aiml", "question": "How would you test model selection at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing supervised learning?"}
+{"domain": "aiml", "question": "Design a system leveraging transformers. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "How would you test attention at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "What are the performance bottlenecks in quantization and how would you mitigate them?"}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to attention? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "What are the performance bottlenecks in model selection and how would you mitigate them?"}
+{"domain": "aiml", "question": "How would you mentor a junior on aiml for their first 30-60-90 days?"}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around evaluation metrics without harming reliability?"}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to vector databases. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "Give a real-world example where quantization matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "How do you scale prompting vs fine-tuning from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "Explain model selection in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "Explain evaluation metrics in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around deep learning without harming reliability?"}
+{"domain": "aiml", "question": "What telemetry would you add to observe supervised learning? (metrics, logs, traces)"}
+{"domain": "aiml", "question": "How do you scale evaluation metrics from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "What are the performance bottlenecks in prompting vs fine-tuning and how would you mitigate them?"}
+{"domain": "aiml", "question": "How would you secure RAG? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "What are the performance bottlenecks in deep learning and how would you mitigate them?"}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around quantization without harming reliability?"}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to unsupervised learning? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "Give a real-world example where unsupervised learning matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Walk through a minimal baseline for vector databases, then evolve it to a production-grade solution."}
+{"domain": "aiml", "question": "What telemetry would you add to observe attention? (metrics, logs, traces)"}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to unsupervised learning. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "Compare two approaches for RAG. When would you choose one over the other?"}
+{"domain": "aiml", "question": "How do you scale unsupervised learning from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "Explain deep learning in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to prompting vs fine-tuning. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "Give a real-world example where deep learning matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Design a system leveraging model selection. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "Design a system leveraging unsupervised learning. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for deep learning? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to attention. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "Walk through a minimal baseline for RAG, then evolve it to a production-grade solution."}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing prompting vs fine-tuning?"}
+{"domain": "aiml", "question": "Give a real-world example where prompting vs fine-tuning matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for supervised learning? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "How would you secure evaluation metrics? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for transformers? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "Walk through a minimal baseline for deep learning, then evolve it to a production-grade solution."}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to quantization? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing evaluation metrics?"}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for unsupervised learning? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "What are the performance bottlenecks in attention and how would you mitigate them?"}
+{"domain": "aiml", "question": "What telemetry would you add to observe vector databases? (metrics, logs, traces)"}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to quantization. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to transformers? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "Give a real-world example where attention matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for vector databases? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "How would you secure transformers? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "How would you test transformers at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "How would you secure attention? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "What are the first principles you apply when approaching problems in aiml?"}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around model selection without harming reliability?"}
+{"domain": "aiml", "question": "What are the performance bottlenecks in vector databases and how would you mitigate them?"}
+{"domain": "aiml", "question": "How would you test vector databases at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to model selection. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "Give a real-world example where evaluation metrics matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Design a system leveraging attention. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "Walk through a minimal baseline for model selection, then evolve it to a production-grade solution."}
+{"domain": "aiml", "question": "Walk through a minimal baseline for prompting vs fine-tuning, then evolve it to a production-grade solution."}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around supervised learning without harming reliability?"}
+{"domain": "aiml", "question": "Design a system leveraging prompting vs fine-tuning. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "How would you test quantization at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing attention?"}
+{"domain": "aiml", "question": "What telemetry would you add to observe deep learning? (metrics, logs, traces)"}
+{"domain": "aiml", "question": "Compare two approaches for unsupervised learning. When would you choose one over the other?"}
+{"domain": "aiml", "question": "How do you scale quantization from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "What telemetry would you add to observe model selection? (metrics, logs, traces)"}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around RAG without harming reliability?"}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to model selection? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "Compare two approaches for deep learning. When would you choose one over the other?"}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to evaluation metrics. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "Compare two approaches for evaluation metrics. When would you choose one over the other?"}
+{"domain": "aiml", "question": "Design a system leveraging quantization. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "How would you test prompting vs fine-tuning at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "How would you test evaluation metrics at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "Compare two approaches for vector databases. When would you choose one over the other?"}
+{"domain": "aiml", "question": "How would you secure model selection? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing unsupervised learning?"}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to transformers. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "How do you scale deep learning from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "Compare two approaches for supervised learning. When would you choose one over the other?"}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing RAG?"}
+{"domain": "aiml", "question": "What telemetry would you add to observe unsupervised learning? (metrics, logs, traces)"}
+{"domain": "aiml", "question": "How would you secure vector databases? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "Explain transformers in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing vector databases?"}
+{"domain": "aiml", "question": "Explain vector databases in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "Explain unsupervised learning in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "How would you test supervised learning at unit, integration, and e2e levels?"}
+{"domain": "aiml", "question": "How do you prioritize time/cost/quality trade-offs in aiml? Give an example."}
+{"domain": "aiml", "question": "Compare two approaches for model selection. When would you choose one over the other?"}
+{"domain": "aiml", "question": "How do you scale RAG from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around attention without harming reliability?"}
+{"domain": "aiml", "question": "What are the performance bottlenecks in unsupervised learning and how would you mitigate them?"}
+{"domain": "aiml", "question": "Give a real-world example where transformers matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Walk through a minimal baseline for unsupervised learning, then evolve it to a production-grade solution."}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for prompting vs fine-tuning? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for attention? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "Give a real-world example where RAG matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Explain prompting vs fine-tuning in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "Design a system leveraging deep learning. Describe APIs, data models, and scaling considerations."}
+{"domain": "aiml", "question": "Compare two approaches for transformers. When would you choose one over the other?"}
+{"domain": "aiml", "question": "How would you secure supervised learning? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing model selection?"}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around transformers without harming reliability?"}
+{"domain": "aiml", "question": "How do you scale attention from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing transformers?"}
+{"domain": "aiml", "question": "Give a real-world example where model selection matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "Explain RAG in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "What are the performance bottlenecks in transformers and how would you mitigate them?"}
+{"domain": "aiml", "question": "What trade-offs would you call out to a non-technical PM when proposing quantization?"}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for evaluation metrics? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "Walk through a minimal baseline for evaluation metrics, then evolve it to a production-grade solution."}
+{"domain": "aiml", "question": "Give a real-world example where supervised learning matters. Outline the end-to-end architecture."}
+{"domain": "aiml", "question": "How do you scale model selection from 1× to 100× load? Identify the first three bottlenecks."}
+{"domain": "aiml", "question": "How would you secure deep learning? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for quantization? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "What telemetry would you add to observe evaluation metrics? (metrics, logs, traces)"}
+{"domain": "aiml", "question": "Explain quantization in the context of aiml. Include pitfalls and best practices."}
+{"domain": "aiml", "question": "What would your rollout strategy be for a major change to evaluation metrics? (blue/green, canary, feature flags)"}
+{"domain": "aiml", "question": "How would you secure quantization? Consider authN/Z, data protection, and least privilege."}
+{"domain": "aiml", "question": "Troubleshoot a failure scenario related to deep learning. What logs, metrics, and traces would you check?"}
+{"domain": "aiml", "question": "Compare two approaches for attention. When would you choose one over the other?"}
+{"domain": "aiml", "question": "Which metrics/SLIs best capture success for model selection? How do you alert without causing noise?"}
+{"domain": "aiml", "question": "How would you reduce cost for a system built around prompting vs fine-tuning without harming reliability?"}
+{"domain": "aiml", "question": "Walk through a minimal baseline for supervised learning, then evolve it to a production-grade solution."}

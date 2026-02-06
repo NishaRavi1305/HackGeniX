@@ -81,6 +81,9 @@ class InterviewQuestion(BaseModel):
     competency: Optional[str] = None  # For behavioral
     status: QuestionStatus = QuestionStatus.PENDING
     
+    # Phase 6.5: Question source tracking
+    source: str = "generated"  # bank, bank_rephrased, bank_personalized, generated
+    
     # Audio for voice mode
     audio_path: Optional[str] = None
     
@@ -137,6 +140,14 @@ class InterviewConfig(BaseModel):
     # Focus areas (optional, for customization)
     focus_skills: List[str] = Field(default_factory=list)
     exclude_topics: List[str] = Field(default_factory=list)
+    
+    # Question Bank settings (Phase 6.5)
+    use_question_bank: bool = True                          # Enable hybrid question generation
+    enabled_domains: Optional[List[str]] = None             # Admin-specified domains (None = auto-detect)
+    auto_detect_domains: bool = True                        # Auto-detect domains from JD
+    bank_question_ratio: float = Field(default=0.7, ge=0.0, le=1.0)  # 70% from bank
+    allow_rephrasing: bool = True                           # LLM can rephrase bank questions
+    allow_personalization: bool = True                      # LLM can add resume context
     
     class Config:
         use_enum_values = True
