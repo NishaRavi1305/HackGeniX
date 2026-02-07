@@ -128,11 +128,25 @@ class SemanticMatcher:
             resume_parts.append(resume.summary)
         if resume.skills:
             resume_parts.append("Skills: " + ", ".join(resume.skills))
+        if resume.areas_of_interest:
+            resume_parts.append("Areas of Interest: " + ", ".join(resume.areas_of_interest))
+        if resume.soft_skills:
+            resume_parts.append("Soft Skills: " + ", ".join(resume.soft_skills))
         for exp in resume.experience[:3]:  # Top 3 experiences
             if exp.description:
                 resume_parts.append(exp.description)
             if exp.highlights:
                 resume_parts.extend(exp.highlights[:3])
+        for proj in resume.projects[:3]:  # Top 3 projects
+            if proj.description:
+                resume_parts.append(proj.description)
+            if proj.highlights:
+                resume_parts.extend(proj.highlights[:3])
+            if proj.tech_stack:
+                resume_parts.append("Technologies: " + ", ".join(proj.tech_stack))
+        for res in resume.research[:2]:  # Top 2 research entries
+            if res.highlights:
+                resume_parts.extend(res.highlights[:2])
         
         resume_text = " ".join(resume_parts) if resume_parts else resume.raw_text[:2000]
         

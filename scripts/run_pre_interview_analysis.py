@@ -101,14 +101,12 @@ def print_skills(label: str, skills: list, color: str = Colors.GREEN):
 async def load_documents(
     resume_path: Path,
     jd_path: Path,
-    use_llm: bool = True,
 ) -> Tuple[ParsedResume, ParsedJobDescription]:
     """Load and parse resume and JD documents.
     
     Args:
         resume_path: Path to candidate resume file
         jd_path: Path to job description file
-        use_llm: If True, use LLM-based parsing (better quality). If False, use rule-based.
     """
     processor = DocumentProcessor()
     
@@ -124,13 +122,10 @@ async def load_documents(
     else:
         raise ValueError(f"Unsupported resume format: {resume_path.suffix}")
     
-    if use_llm:
-        print(f"  {Colors.DIM}Using LLM-based parsing (Ollama)...{Colors.RESET}")
-        resume = await processor.parse_resume_with_llm(resume_bytes, resume_content_type)
-        print(f"  {Colors.GREEN}✓ Resume parsed with LLM successfully{Colors.RESET}")
-    else:
-        resume = await processor.parse_resume(resume_bytes, resume_content_type)
-        print(f"  {Colors.GREEN}✓ Resume parsed (rule-based) successfully{Colors.RESET}")
+    print(f"  {Colors.DIM}Using LLM-based parsing (Ollama)...{Colors.RESET}")
+    resume_text = await processor.extract_text(resume_bytes, resume_content_type)
+    resume = await processor.parse_resume_with_llm(resume_text)
+    print(f"  {Colors.GREEN}✓ Resume parsed with LLM successfully{Colors.RESET}")
     
     # Load JD
     print_info("Loading job description", str(jd_path))
@@ -144,13 +139,9 @@ async def load_documents(
         # Assume plain text
         jd_text = jd_bytes.decode("utf-8", errors="replace")
     
-    if use_llm:
-        print(f"  {Colors.DIM}Using LLM-based parsing (Ollama)...{Colors.RESET}")
-        jd = await processor.parse_job_description_with_llm(jd_text)
-        print(f"  {Colors.GREEN}✓ Job description parsed with LLM successfully{Colors.RESET}")
-    else:
-        jd = await processor.parse_job_description(jd_text)
-        print(f"  {Colors.GREEN}✓ Job description parsed (rule-based) successfully{Colors.RESET}")
+    print(f"  {Colors.DIM}Using LLM-based parsing (Ollama)...{Colors.RESET}")
+    jd = await processor.parse_job_description_with_llm(jd_text)
+    print(f"  {Colors.GREEN}✓ Job description parsed with LLM successfully{Colors.RESET}")
     
     return resume, jd
 
@@ -605,13 +596,12 @@ async def generate_pdf_report(
     return output_path
 
 
-async def run_analysis(resume_path: Path, jd_path: Path, use_llm: bool = True):
+async def run_analysis(resume_path: Path, jd_path: Path):
     """Run the full pre-interview analysis.
     
     Args:
         resume_path: Path to candidate resume
         jd_path: Path to job description
-        use_llm: If True, use LLM-based parsing for better extraction quality
     """
     start_time = datetime.now()
     
@@ -622,13 +612,12 @@ async def run_analysis(resume_path: Path, jd_path: Path, use_llm: bool = True):
     print("="*70)
     print(Colors.RESET)
     
-    parsing_mode = "LLM-based" if use_llm else "Rule-based"
     print(f"  {Colors.DIM}Started: {start_time.strftime('%Y-%m-%d %H:%M:%S')}{Colors.RESET}")
-    print(f"  {Colors.DIM}Parsing mode: {parsing_mode}{Colors.RESET}")
+    print(f"  {Colors.DIM}Parsing mode: LLM-based{Colors.RESET}")
     
     # Step 1: Load documents
     print_header("DOCUMENT PARSING")
-    resume, jd = await load_documents(resume_path, jd_path, use_llm=use_llm)
+    resume, jd = await load_documents(resume_path, jd_path)
     
     # Step 2: Display parsed info
     display_candidate_profile(resume)
@@ -726,11 +715,6 @@ def main():
         help="Path to job description (PDF, DOCX, or TXT)",
     )
     parser.add_argument(
-        "--no-llm",
-        action="store_true",
-        help="Use rule-based parsing instead of LLM (faster but less accurate)",
-    )
-    parser.add_argument(
         "--clear-cache",
         action="store_true",
         help="Clear cached parsed documents before running",
@@ -768,8 +752,7 @@ def main():
         sys.exit(1)
     
     # Run analysis
-    use_llm = not args.no_llm
-    asyncio.run(run_analysis(resume_path, jd_path, use_llm=use_llm))
+    asyncio.run(run_analysis(resume_path, jd_path))
 
 
 if __name__ == "__main__":

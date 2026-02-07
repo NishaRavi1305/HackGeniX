@@ -23,6 +23,8 @@ from src.models.documents import (
     MatchResult,
     ResumeDocument,
     JobDescriptionDocument,
+    ParsedResume,
+    ParsedJobDescription,
 )
 
 logger = logging.getLogger(__name__)
@@ -79,11 +81,12 @@ async def upload_resume(
         content_type=file.content_type,
     )
     
-    # Parse resume with LLM (synchronous)
+    # Extract text and parse with LLM (mirrors the JD upload flow)
     processor = DocumentProcessor()
     
     try:
-        parsed_data = await processor.parse_resume_with_llm(content, file.content_type)
+        raw_text = await processor.extract_text(content, file.content_type)
+        parsed_data = await processor.parse_resume_with_llm(raw_text)
         status = "parsed"
         error_message = None
         logger.info(f"Resume parsed successfully: {file.filename}")
@@ -431,16 +434,28 @@ async def match_resume_to_job(
             detail="Both resume and job description must be parsed before matching"
         )
     
-    # TODO: Call semantic matcher service
-    # For now, return placeholder
-    return MatchResult(
+    # Reconstruct Pydantic models from stored dicts
+    resume_parsed = resume.get("parsed_data")
+    jd_parsed = jd.get("parsed_data")
+    
+    if not resume_parsed or not jd_parsed:
+        raise HTTPException(
+            status_code=400,
+            detail="Parsed data missing from one or both documents. Please re-upload."
+        )
+    
+    parsed_resume = ParsedResume(**resume_parsed)
+    parsed_jd = ParsedJobDescription(**jd_parsed)
+    
+    # Run semantic matching
+    from src.services.semantic_matcher import get_semantic_matcher
+    
+    matcher = get_semantic_matcher()
+    result = await matcher.match(
+        resume=parsed_resume,
+        job_description=parsed_jd,
         resume_id=resume_id,
         job_description_id=job_description_id,
-        overall_score=0,
-        skill_match_score=0,
-        experience_match_score=0,
-        semantic_similarity_score=0,
-        matched_skills=[],
-        missing_skills=[],
-        recommendations=["Documents need to be processed by the matching service"],
     )
+    
+    return result

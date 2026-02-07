@@ -544,77 +544,96 @@ Output format (JSON):
 # LLM-Based Document Extraction Prompts
 # ============================================================================
 
-RESUME_EXTRACTION_PROMPT = """Extract structured information from this resume text.
+RESUME_EXTRACTION_PROMPT = """You are a JSON formatter. Your ONLY job is to map the raw resume text below into structured key-value pairs. You must copy every word VERBATIM from the resume — do NOT summarize, rephrase, shorten, paraphrase, or omit any text.
 
-**Resume Text:**
+**Raw Resume Text:**
 {resume_text}
 
-**Instructions:**
-Parse the resume and extract all information into the JSON structure below.
-Be thorough - extract ALL experience entries, ALL skills, ALL education.
-The candidate's name is typically at the very top of the resume.
+**Your task:**
+Read every line of the text above. For each piece of information, decide which JSON key it belongs to and copy it there word-for-word. Generate key-value pairs that capture EVERYTHING in the resume.
 
-**Output JSON format:**
+**RULES (read before you start):**
+1. COPY VERBATIM — every bullet point, description, highlight must be copied exactly as written. Preserve every number, metric, percentage, and technical term.
+2. SKILLS — scan the ENTIRE resume and collect every technology, tool, language, framework, library, platform, database, cloud service, API, and methodology mentioned anywhere: skills sections, project parentheticals, experience bullets, research descriptions. Flatten all sub-categories into one flat list.
+3. PER-ENTRY SKILLS — for each experience, project, and research entry, also list the specific skills/technologies mentioned in THAT entry's text.
+4. IMPACT — for each experience, project, and research entry, extract every quantified metric, number, or measurable outcome (e.g. "700+ partners", "94% accuracy", "16-18 hours saved", "SSIM of 0.742").
+5. PROJECTS — technologies listed in parentheses next to a project name are the tech_stack. Skills includes tech_stack PLUS any additional technologies mentioned in the bullet points (e.g. if "Streamlit" appears in a bullet but not the parenthetical, it goes in skills but not tech_stack).
+6. DYNAMIC SECTIONS — if the resume has sections not covered by the schema below (e.g. Awards, Volunteer Work, Publications, Hobbies, Languages), add them under "extra_sections" as key-value pairs.
+7. Use null for missing/uncertain fields, never empty strings.
+8. The candidate's name is the largest text at the very top. Do NOT confuse it with university, company, or location names.
+9. Preserve original date formats from the resume.
+10. If GPA is a percentage, convert to 4.0 scale (divide by 25).
+
+**Output JSON structure:**
 {{
     "contact": {{
-        "full_name": "Candidate's full name (First Last)",
-        "email": "email@example.com or null",
-        "phone": "phone number as shown or null",
-        "linkedin": "LinkedIn URL or username or null",
-        "github": "GitHub URL or username or null",
-        "location": "City, State/Country or null"
+        "name": "Full name from top of resume",
+        "email": "email or null",
+        "phone": "phone exactly as shown or null",
+        "linkedin": "LinkedIn URL/username or null",
+        "github": "GitHub URL/username or null",
+        "location": "location or null"
     }},
-    "summary": "Professional summary or objective statement (null if not present)",
-    "skills": ["skill1", "skill2", "skill3"],
-    "experience": [
-        {{
-            "company": "Company Name",
-            "title": "Job Title",
-            "location": "City, Country or null",
-            "start_date": "Start date as shown (e.g., Jan 2020, 2020-01, 2020)",
-            "end_date": "End date or Present or null",
-            "description": "Role description or responsibilities",
-            "highlights": ["key achievement 1", "key achievement 2"]
-        }}
-    ],
+    "summary": "Professional summary copied verbatim, or null if not present",
     "education": [
         {{
-            "institution": "University/School Name",
-            "degree": "Degree type (B.S., M.S., PhD, etc.)",
-            "field": "Field of study or major",
-            "start_date": "Start year or null",
-            "end_date": "End/graduation year",
-            "gpa": null or numeric GPA if mentioned
+            "institution": "University name",
+            "degree": "Degree type (B.Tech, M.S., etc.)",
+            "field": "Field of study",
+            "start_date": "start or null",
+            "end_date": "end or Expected year",
+            "gpa": 0.0
         }}
     ],
-    "certifications": ["Certification 1", "Certification 2"],
+    "experience": [
+        {{
+            "company": "Company name",
+            "title": "Job title / role",
+            "location": "City or null",
+            "start_date": "start date as shown",
+            "end_date": "end date or Present or null",
+            "highlights": [
+                "Copy each bullet point EXACTLY as written in the resume"
+            ],
+            "skills": ["every technology/tool mentioned in THIS entry's bullets"],
+            "impact": ["every quantified metric from THIS entry, e.g. 700+ partners, 15+ APIs"]
+        }}
+    ],
     "projects": [
         {{
-            "name": "Project Name",
-            "description": "Brief description",
-            "technologies": ["tech1", "tech2"],
-            "url": "project URL if mentioned or null"
+            "name": "Project name (without parenthetical tech list)",
+            "tech_stack": ["technologies listed in parentheses next to project name"],
+            "highlights": [
+                "Copy each bullet point EXACTLY as written"
+            ],
+            "skills": ["tech_stack items PLUS any additional technologies from the bullets"],
+            "impact": ["every quantified metric, e.g. 94% accuracy, 65ms latency"]
         }}
     ],
-    "extraction_confidence": {{
-        "name": 0.0-1.0,
-        "contact": 0.0-1.0,
-        "experience": 0.0-1.0,
-        "skills": 0.0-1.0,
-        "education": 0.0-1.0
+    "research": [
+        {{
+            "title": "Research title verbatim",
+            "venue": "Publication venue or null",
+            "status": "Published, Awaiting Approval, etc. or null",
+            "highlights": [
+                "Copy each bullet point EXACTLY as written"
+            ],
+            "skills": ["technologies/methods mentioned"],
+            "impact": ["quantified results, e.g. SSIM of 0.742, PSNR of 23.8 dB"]
+        }}
+    ],
+    "skills": [
+        "FLAT LIST of EVERY technology, tool, language, framework, platform, database, cloud service mentioned ANYWHERE in the entire resume — deduplicated"
+    ],
+    "areas_of_interest": ["domains/areas of interest if listed, e.g. AI/ML, Data Science"],
+    "soft_skills": ["soft skills if listed, e.g. Leadership, Critical Thinking"],
+    "certifications": ["certification names if any"],
+    "extra_sections": {{
+        "section_name": "content for any resume sections not covered above"
     }}
 }}
 
-**Rules:**
-- Use null for missing/uncertain fields, never empty strings
-- Extract ALL entries from each section, not just the first few
-- Skills should include: programming languages, frameworks, databases, tools, cloud platforms, methodologies
-- For dates, preserve the original format from the resume
-- Be precise with the candidate's full name - it's usually the largest text at the top
-- Do not confuse university names, company names, or location names with the candidate's name
-- If GPA is mentioned as percentage, convert to 4.0 scale (divide by 25)
-
-**Return ONLY the JSON object, no markdown, no explanation.**"""
+**Return ONLY the JSON object. No markdown fences, no explanation, no text outside the JSON.**"""
 
 
 JD_EXTRACTION_PROMPT = """Extract structured information from this job description.
